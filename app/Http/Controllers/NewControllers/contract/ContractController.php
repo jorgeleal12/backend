@@ -8,7 +8,10 @@ use Illuminate\Support\Facades\DB;
 
 class ContractController extends Controller
 {
-    //
+    public function __construct()
+    {
+        $this->middleware('jwt', ['except' => ['login']]);
+    }
 
     public function create(Request $request)
     {
@@ -42,7 +45,6 @@ class ContractController extends Controller
             ->where('idcontract', $idcontract)
             ->update([
                 'contract_name' => $contract_name,
-
             ]);
         return response()->json(['status' => 'ok', 'response' => true], 200);
     }
