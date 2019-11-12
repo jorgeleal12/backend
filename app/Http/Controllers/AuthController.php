@@ -1,11 +1,13 @@
 <?php
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        $this->middleware('jwt', ['except' => ['login']]);
     }
     /**
      * Get a JWT via given credentials.
@@ -16,7 +18,8 @@ class AuthController extends Controller
     {
         $credentials = request(['id', 'password']);
         if (!$token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['error' => true], 200);
+
         }
         return $this->respondWithToken($token);
     }
@@ -66,6 +69,7 @@ class AuthController extends Controller
             'token_type'   => 'bearer',
             'expires_in'   => auth()->factory()->getTTL() * 60,
             'user'         => auth()->user(),
+            'error'        => false,
         ]);
     }
 
