@@ -5,9 +5,15 @@ namespace App\Http\Controllers\NewControllers\user\users;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('jwt', ['except' => ['login']]);
+    }
     public function create(Request $request)
     {
 
@@ -20,18 +26,17 @@ class UsersController extends Controller
         $rol_idrol         = $request->input("rol_idrol");
         $company_idcompany = $request->input("company_idcompany");
         $id                = $request->input("id"); //cedula o identificacion del usuario
-        $contract          = $request->input("contract");
+        $contract          = $request->input("selectedUser");
         $type              = $request->input("type");
 
         $insert = DB::table('users')
             ->insertGetid([
-
                 'name'              => $name,
                 'last_name'         => $last_name,
                 'email'             => $email,
-                'password'          => $password,
+                'password'          => Hash::make($password),
                 'state'             => $state,
-                'rol_idrol'         => $rol_idrol,
+                'rol_idrol'         => 1,
                 'company_idcompany' => $company_idcompany,
                 'id'                => $id,
                 'type'              => $type,
@@ -44,11 +49,15 @@ class UsersController extends Controller
     public function contract_user($contract, $insertid)
     {
         foreach ($contract as $contracts) {
+            echo $contracts;
+            $search_contract = DB::table('contract')
+                ->where('contract_name', $contracts)
+                ->first();
 
             $insert = DB::table('contract_user')
                 ->insert([
                     'users_idusers' => $insertid,
-                    'idcontract'    => $contracts,
+                    'idcontract'    => $search_contract->idcontract,
                 ]);
         }
     }
@@ -94,7 +103,7 @@ class UsersController extends Controller
     {
 
         $search = DB::table('users')
-            ->join('rol', 'rol.idrol', '=', 'users.rol_idrol')
+            ->leftjoin('rol', 'rol.idrol', '=', 'users.rol_idrol')
             ->select('users.*', 'rol.*', 'users.state as id_state', DB::raw('(CASE WHEN users.state = "1" THEN "Activo" ELSE "Cancelado" END) AS state'))
             ->get();
 
@@ -136,8 +145,9 @@ class UsersController extends Controller
         $idusers = $request->input("idusers");
 
         $search = DB::table('contract_user')
+            ->leftjoin('contract', 'contract.idcontract', '=', 'contract_user.idcontract')
             ->where('users_idusers', $idusers)
-            ->select('contract_user.idcontract')
+            ->select('contract_user.idcontract', 'contract.contract_name')
             ->get();
 
         return response()->json(['status' => 'ok', 'response' => $search], 200);
