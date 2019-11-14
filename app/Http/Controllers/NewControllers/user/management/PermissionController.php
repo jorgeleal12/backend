@@ -45,8 +45,6 @@ class PermissionController extends Controller
     public function search(Request $request)
     {
         $search = DB::table('permission')
-            ->leftjoin('action_permission', 'action_permission.idpermission', '=', 'permission.idpermission')
-
             ->get();
 
         return response()->json(['status' => 'ok', 'response' => $search], 200);
@@ -67,36 +65,36 @@ class PermissionController extends Controller
 
     public function create_rol(Request $request)
     {
-        $name            = $request->input("name");
-        $rolePermissions = $request->input("rolepermission");
+        $name_rol = $request->input("name_rol");
 
         $insert = DB::table('rol')
             ->insertGetid([
-                'name_rol' => $name,
+                'name_rol' => $name_rol,
             ]);
 
-        foreach ($rolePermissions as $t) {
-            $idrol_permission    = isset($t['idrol_permission']) ? $t['idrol_permission'] : null;
-            $idaction_permission = $t['idaction_permission'];
-            $idpermission        = $t['idpermission'];
-            $save                = $t['save'];
-            $edit                = $t['edit'];
-            $delete              = $t['delete'];
+        // foreach ($rolePermissions as $t) {
+        //     $idrol_permission    = isset($t['idrol_permission']) ? $t['idrol_permission'] : null;
+        //     $idaction_permission = $t['idaction_permission'];
+        //     $idpermission        = $t['idpermission'];
+        //     $save                = $t['save'];
+        //     $edit                = $t['edit'];
+        //     $delete              = $t['delete'];
 
-            if (is_null($idrol_permission)) {
-                $save = DB::table('rol_permission')
-                    ->insert([
-                        'rol_idrol'           => $insert,
-                        'idaction_permission' => $idaction_permission,
-                        'save'                => $save,
-                        'edit'                => $edit,
-                        'delete'              => $delete,
-                    ]);
-            } else {
+        //     if (is_null($idrol_permission)) {
+        //         $save = DB::table('rol_permission')
+        //             ->insert([
+        //                 'rol_idrol'           => $insert,
+        //                 'idaction_permission' => $idaction_permission,
+        //                 'save'                => $save,
+        //                 'edit'                => $edit,
+        //                 'delete'              => $delete,
+        //             ]);
+        //     } else {
 
-            }
+        //     }
 
-        }
+        // }
+        return response()->json(['status' => 'ok', 'response' => $insert], 200);
     }
 
     public function searchs(Request $request)
@@ -112,9 +110,8 @@ class PermissionController extends Controller
     {
         $idrol = $request->input("idrol");
 
-        $search = DB::table('rol')
-            ->join('rol_permission', 'rol_permission.rol_idrol', '=', 'rol.idrol')
-            ->where('idrol', $idrol)
+        $search = DB::table('rol_permission')
+            ->where('rol_idrol', $idrol)
             ->get();
 
         return response()->json(['status' => 'ok', 'response' => $search], 200);
@@ -137,39 +134,33 @@ class PermissionController extends Controller
 
     public function update_permission_rol(Request $request)
     {
-        $save   = $request->input("save");
-        $edit   = $request->input("edit");
-        $delete = $request->input("delete");
 
-        $idaction_permission = $request->input("idaction_permission");
-        $idpermission        = $request->input("idpermission");
-        $name_permission     = $request->input("name_permission");
-        $idrol_permission    = $request->input("idrol_permission");
-        $idrol               = $request->input("idrol");
+        $idrol   = $request->input("idrol");
+        $key     = $request->input("key");
+        $checked = $request->input("checked");
+        $action  = $request->input("action");
 
         $search = DB::table('rol_permission')
-            ->where('idrol_permission', $idrol_permission)
+            ->where('idrol_permission', $key)
             ->first();
         // var_dump($search);
         if ($search) {
-            $update = DB::table('rol_permission')
-                ->where('idrol_permission', $idrol_permission)
-                ->update([
-                    'save'   => $save,
-                    'edit'   => $edit,
-                    'delete' => $delete,
+            // $update = DB::table('rol_permission')
+            //     ->where('idrol_permission', $idrol_permission)
+            //     ->update([
+            //         'save'   => $save,
+            //         'edit'   => $edit,
+            //         'delete' => $delete,
 
-                ]);
-            return response()->json(['status' => 'ok', 'response' => false], 200);
+            //     ]);
+            // return response()->json(['status' => 'ok', 'response' => false], 200);
         } else {
 
             $insert = DB::table('rol_permission')
                 ->insertGetid([
-                    'save'                => $save,
-                    'edit'                => $edit,
-                    'delete'              => $delete,
-                    'rol_idrol'           => $idrol,
-                    'idaction_permission' => $idaction_permission,
+                    $action        => $checked,
+                    'rol_idrol'    => $idrol,
+                    'idpermission' => $key,
                 ]);
             return response()->json(['status' => 'ok', 'response' => true, 'result' => $insert], 200);
         }
