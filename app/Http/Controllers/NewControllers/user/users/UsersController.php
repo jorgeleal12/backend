@@ -36,7 +36,7 @@ class UsersController extends Controller
                 'email'             => $email,
                 'password'          => Hash::make($password),
                 'state'             => $state,
-                'rol_idrol'         => 1,
+                'rol_idrol'         => $rol_idrol,
                 'company_idcompany' => $company_idcompany,
                 'id'                => $id,
                 'type'              => $type,
@@ -49,7 +49,7 @@ class UsersController extends Controller
     public function contract_user($contract, $insertid)
     {
         foreach ($contract as $contracts) {
-            echo $contracts;
+
             $search_contract = DB::table('contract')
                 ->where('contract_name', $contracts)
                 ->first();

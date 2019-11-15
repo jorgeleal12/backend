@@ -123,6 +123,7 @@ class PermissionController extends Controller
             ->first();
 
         if ($search) {
+            echo '1';
             $update = DB::table('rol_permission')
                 ->where('idpermission', $key)
                 ->where('rol_idrol', $idrol)

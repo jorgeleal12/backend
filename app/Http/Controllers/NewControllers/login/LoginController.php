@@ -46,9 +46,10 @@ class LoginController extends Controller
         $search = DB::table('users')
             ->join('rol', 'rol.idrol', '=', 'users.rol_idrol')
             ->join('rol_permission', 'rol_permission.rol_idrol', '=', 'rol.idrol')
-            ->join('action_permission', 'action_permission.idaction_permission', '=', 'rol_permission.idaction_permission')
+            ->join('permission', 'permission.idpermission', '=', 'rol_permission.idpermission')
+
             ->where('idusers', $idusers)
-            ->select('rol.idrol', 'rol_permission.idrol_permission', 'rol_permission.idaction_permission', 'rol_permission.save', 'rol_permission.delete', 'rol_permission.edit', 'action_permission.idpermission as id')
+            ->select('rol.idrol', 'rol_permission.idrol_permission', 'rol_permission.save', 'rol_permission.delete', 'rol_permission.edit', 'permission.idpermission as id')
             ->get();
 
         return response()->json(['status' => 'ok', 'reponse' => $search], 200);
