@@ -12,12 +12,15 @@ class UsersTableSeeder extends Seeder
     {
         User::truncate();
         User::create([
-            'email'     => 'admin@admin.com',
-            'password'  => Hash::make('adminadmin'),
-            'name'      => 'andres',
-            'last_name' => 'leal',
-            'state'     => '1',
-            'id'        => '1039679695',
+            'email'             => 'admin@admin.com',
+            'password'          => Hash::make('adminadmin'),
+            'name'              => 'andres',
+            'last_name'         => 'leal',
+            'state'             => '1',
+            'type'              => '1',
+            'rol_idrol'         => '1',
+            'company_idcompany' => '1',
+            'id'                => '1039679695',
         ]);
     }
 }

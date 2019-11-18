@@ -9,22 +9,26 @@ use Illuminate\Support\Facades\DB;
 class EmployeeController extends Controller
 {
     //
-
+    public function __construct()
+    {
+        $this->middleware('jwt', ['except' => ['login']]);
+    }
     public function create(Request $request)
     {
-        $idemployees             = $request->input("idemployees");
-        $name                    = $request->input("name");
-        $last_name               = $request->input("last_name");
-        $sex                     = $request->input("sex");
-        $identification          = $request->input("identification");
-        $phone                   = $request->input("phone");
-        $cel                     = $request->input("cel");
-        $address                 = $request->input("address");
-        $civil_status            = $request->input("civil_status");
-        $bank                    = $request->input("bank");
-        $account_type            = $request->input("account_type");
-        $account_number          = $request->input("account_number");
-        $birthdate               = $request->input("birthdate");
+        $idemployees    = $request->input("idemployees");
+        $name           = $request->input("name");
+        $last_name      = $request->input("last_name");
+        $sex            = $request->input("sex");
+        $identification = $request->input("identification");
+        $phone          = $request->input("phone");
+        $cel            = $request->input("cel");
+        $address        = $request->input("address");
+        $civil_status   = $request->input("civil_status");
+        $bank           = $request->input("bank");
+        $account_type   = $request->input("account_type");
+        $account_number = $request->input("account_number");
+        // $birthdate               = $request->input("birthdate");
+        $birthdate               = date('Y-m-d', strtotime($request->input("birthdate"))) == '1969-12-31' ? null : date('Y-m-d', strtotime($request->input("birthdate")));
         $pension_idpension       = $request->input("pension_idpension");
         $arl_idarl               = $request->input("arl_idarl");
         $eps_ideps               = $request->input("eps_ideps");
@@ -81,7 +85,7 @@ class EmployeeController extends Controller
         $bank                    = $request->input("bank");
         $account_type            = $request->input("account_type");
         $account_number          = $request->input("account_number");
-        $birthdate               = $request->input("birthdate");
+        $birthdate               = date('Y-m-d', strtotime($request->input("birthdate"))) == '1969-12-31' ? null : date('Y-m-d', strtotime($request->input("birthdate")));
         $pension_idpension       = $request->input("pension_idpension");
         $arl_idarl               = $request->input("arl_idarl");
         $eps_ideps               = $request->input("eps_ideps");
