@@ -72,6 +72,7 @@ Route::group([
     Route::post('/list/list_municipality', 'NewControllers\lists\ListController@list_municipality');
     Route::post('/list/list_type_network', 'NewControllers\lists\ListController@list_type_network');
     Route::post('/list/list_photos_service', 'NewControllers\lists\ListController@list_photos_service');
+    Route::post('/list/list_ubigeos', 'NewControllers\lists\ListController@list_ubigeos');
 
     Route::post('/odi/create', 'NewControllers\odi\OdiController@create');
     Route::post('/odi/update', 'NewControllers\odi\OdiController@update');

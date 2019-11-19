@@ -55,6 +55,17 @@ class ListController extends Controller
         return response()->json(['status' => 'ok', 'response' => $search], 200);
     }
 
+    public function list_ubigeos(Request $request)
+    {
+
+        $id = $request->input("id");
+        $filter = $request->input("filter");
+
+        $search          = DB::table('Ubigeos')->distinct()->select('idUbigeos','departamento')->get();
+
+        return response()->json(['status' => 'ok', 'response' => $search], 200);
+    }
+
     public function list_municipality(Request $request)
     {
 
