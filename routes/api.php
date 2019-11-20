@@ -197,5 +197,5 @@ Route::group([
 
     Route::post('/programming/search', 'NewControllers\odi\ProgrammingController@search');
 
-    Route::post('/programming/programming', 'NewControllers\odi\ProgrammingController@programming');
+    Route::post('/work/create', 'NewControllers\Work\WorkController@create');
 });
