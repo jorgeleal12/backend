@@ -12,7 +12,6 @@ class ListController extends Controller
 
     public function list_eps(Request $request)
     {
-
         $search = DB::table('eps')
             ->get();
 
@@ -21,7 +20,6 @@ class ListController extends Controller
 
     public function list_arl(Request $request)
     {
-
         $search = DB::table('arl')
             ->get();
 
@@ -30,7 +28,6 @@ class ListController extends Controller
 
     public function list_pension(Request $request)
     {
-
         $search = DB::table('pension')
             ->get();
 
@@ -39,7 +36,6 @@ class ListController extends Controller
 
     public function list_service(Request $request)
     {
-
         $search = DB::table('type_service')
             ->get();
 
@@ -48,7 +44,6 @@ class ListController extends Controller
 
     public function list_photos(Request $request)
     {
-
         $search = DB::table('photos')
             ->get();
 
@@ -57,18 +52,16 @@ class ListController extends Controller
 
     public function list_ubigeos(Request $request)
     {
-
         $id = $request->input("id");
         $filter = $request->input("filter");
 
-        $search          = DB::table('Ubigeos')->distinct()->select('idUbigeos','departamento')->get();
+        $search          = DB::table('Ubigeos')->distinct()->select('idUbigeos', 'departamento')->get();
 
         return response()->json(['status' => 'ok', 'response' => $search], 200);
     }
 
     public function list_municipality(Request $request)
     {
-
         $id_departamento = $request->input("id_departamento");
         $search          = DB::table('municipality')
             ->where('id_departament', $id_departamento)
@@ -96,6 +89,21 @@ class ListController extends Controller
             ->join('photos', 'photos.idphotos', 'photos_service.photos_idphotos')
             ->where('type_network_idtype_network', $type_network_idtype_network)
             ->get();
+        return response()->json(['status' => 'ok', 'response' => $search], 200);
+    }
+
+    public function list_typework()
+    {
+        $search = DB::table('typework')
+            ->get();
+
+        return response()->json(['status' => 'ok', 'response' => $search], 200);
+    }
+    public function list_statework()
+    {
+        $search = DB::table('statework')
+            ->get();
+
         return response()->json(['status' => 'ok', 'response' => $search], 200);
     }
 }

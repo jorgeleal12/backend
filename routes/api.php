@@ -64,6 +64,22 @@ Route::group([
     Route::post('/employee/create_pension', 'NewControllers\employee\EmployeeController@create_pension');
     Route::post('/employee/delete_pension', 'NewControllers\employee\EmployeeController@delete_pension');
 
+
+    //servicios o obras de gas
+    /////////////////////////////////////////-------------------------------------///////////////////////////
+    Route::post('/typework/create', 'NewControllers\administration\work\TypeController@create');
+    Route::post('/typework/update', 'NewControllers\administration\work\TypeController@update');
+    Route::post('/typework/search', 'NewControllers\administration\work\TypeController@search');
+
+    Route::post('/statework/search', 'NewControllers\administration\work\StateController@search');
+    Route::post('/statework/create', 'NewControllers\administration\work\StateController@create');
+    Route::post('/statework/update', 'NewControllers\administration\work\StateController@update');
+
+
+
+
+    /////////////////////////////////////////-------------------------------------///////////////////////////
+
     Route::post('/list/list_eps', 'NewControllers\lists\ListController@list_eps');
     Route::post('/list/list_arl', 'NewControllers\lists\ListController@list_arl');
     Route::post('/list/list_pension', 'NewControllers\lists\ListController@list_pension');
@@ -73,6 +89,8 @@ Route::group([
     Route::post('/list/list_type_network', 'NewControllers\lists\ListController@list_type_network');
     Route::post('/list/list_photos_service', 'NewControllers\lists\ListController@list_photos_service');
     Route::post('/list/list_ubigeos', 'NewControllers\lists\ListController@list_ubigeos');
+    Route::post('/list/list_typework', 'NewControllers\lists\ListController@list_typework');
+    Route::post('/list/list_statework', 'NewControllers\lists\ListController@list_statework');
 
     Route::post('/odi/create', 'NewControllers\odi\OdiController@create');
     Route::post('/odi/update', 'NewControllers\odi\OdiController@update');
