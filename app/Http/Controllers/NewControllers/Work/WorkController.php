@@ -4,8 +4,8 @@ namespace App\Http\Controllers\NewControllers\Work;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-// use Illuminate\Support\Facades\DB;
 class WorkController extends Controller
 {
     //
@@ -56,6 +56,40 @@ class WorkController extends Controller
         $nameassistant  = $request->input("nameassistant"); //Auxiliar constructor
         $datem          = date('Y-m-d', strtotime($request->input("datem"))) == '1969-12-31' ? null : date('Y-m-d', strtotime($request->input("datem"))); //Fecha mocha
 
-        return response()->json(['status' => 'ok', 'reponse' => true], 200);
+        $insert = DB::table('work')
+            ->insertGetId([
+                'dni'          => $dni,
+                'client'       => $client,
+                'phone'        => $phone,
+                'cel'          => $cel,
+                'stratum'      => $stratum,
+                'province'     => $province,
+                'adviser'      => $adviser,
+                'district'     => $district,
+                'hub'          => $hub,
+                'dater'        => $dater,
+                'dayans'       => $dayans,
+                'datev'        => $datev,
+                'dateh'        => $dateh,
+                'fechaa'       => $fechaa,
+                'fechac'       => $fechac,
+                'fechatc'      => $fechatc,
+                'cosntructor'  => $cosntructor,
+                'tecnico1'     => $tecnico1,
+                'enabler'      => $enabler,
+                'inspector'    => $inspector,
+                'obsp'         => $obsp,
+                'obs'          => $obs,
+                'programmed'   => $programmed,
+                'dateinn'      => $dateinn,
+                'supervisor'   => $supervisor,
+                'technical'    => $technical,
+                'assistant'    => $assistant,
+                'datem'        => $datem,
+                'typework_id'  => $type,
+                'statework_id' => $state,
+
+            ]);
+        return response()->json(['status' => 'ok', 'reponse' => $insert], 200);
     }
 }
