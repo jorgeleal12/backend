@@ -64,7 +64,6 @@ Route::group([
     Route::post('/employee/create_pension', 'NewControllers\employee\EmployeeController@create_pension');
     Route::post('/employee/delete_pension', 'NewControllers\employee\EmployeeController@delete_pension');
 
-
     //servicios o obras de gas
     /////////////////////////////////////////-------------------------------------///////////////////////////
     Route::post('/typework/create', 'NewControllers\administration\work\TypeController@create');
@@ -75,8 +74,10 @@ Route::group([
     Route::post('/statework/create', 'NewControllers\administration\work\StateController@create');
     Route::post('/statework/update', 'NewControllers\administration\work\StateController@update');
 
+    Route::post('/work/create', 'NewControllers\Work\WorkController@create');
+    Route::post('/work/update', 'NewControllers\Work\WorkController@update');
 
-
+    Route::get('/work/search', 'NewControllers\Work\WorkController@search');
 
     /////////////////////////////////////////-------------------------------------///////////////////////////
 
@@ -215,5 +216,4 @@ Route::group([
 
     Route::post('/programming/search', 'NewControllers\odi\ProgrammingController@search');
 
-    Route::post('/work/create', 'NewControllers\Work\WorkController@create');
 });
