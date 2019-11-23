@@ -78,6 +78,8 @@ Route::group([
     Route::post('/work/update', 'NewControllers\Work\WorkController@update');
 
     Route::get('/work/search', 'NewControllers\Work\WorkController@search');
+    Route::get('/work/search_name', 'NewControllers\Work\WorkController@search_name');
+
 
     /////////////////////////////////////////-------------------------------------///////////////////////////
 
@@ -215,5 +217,4 @@ Route::group([
     Route::post('/import/import', 'NewControllers\odi\ImporController@import');
 
     Route::post('/programming/search', 'NewControllers\odi\ProgrammingController@search');
-
 });
