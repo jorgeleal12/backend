@@ -174,6 +174,9 @@ class WorkController extends Controller
     public function search()
     {
         $search = DB::table('work')
+            ->join('statework', 'statework.idstatework', '=', 'work.statework_id')
+            ->join('typework', 'typework.idtypework', '=', 'work.typework_id')
+
         // ->orderBy('csc', 'asc')
             ->select()
             ->paginate(10);
@@ -189,7 +192,7 @@ class WorkController extends Controller
         $client = $request->input("name");
 
         $search = DB::table('work')
-        ->where('client', 'like', '%' . $client . '%')
+            ->where('client', 'like', '%' . $client . '%')
             ->orderBy('client', 'asc')
             ->paginate(10);
 
