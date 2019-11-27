@@ -80,6 +80,8 @@ Route::group([
 
     Route::get('/work/search', 'NewControllers\Work\WorkController@search');
     Route::get('/work/search_name', 'NewControllers\Work\WorkController@search_name');
+    Route::post('/work/check', 'NewControllers\Work\ImportController@check');
+    Route::post('/work/dataimport', 'NewControllers\Work\ImportController@dataimport');
 
     /////////////////////////////////////////-------------------------------------///////////////////////////
 

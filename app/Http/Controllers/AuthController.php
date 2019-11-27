@@ -1,7 +1,10 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Contract;
 
 class AuthController extends Controller
 {
@@ -18,11 +21,22 @@ class AuthController extends Controller
     {
         $credentials = request(['id', 'password', 'company_idcompany']);
 
-        if (!$token = auth()->attempt($credentials)) {
+        $company_idcompany = request('company_idcompany');
+        $id = request('id');
+        $password = request('password');
+        $contract = request('contract');
 
+        $user = User::where('id', $id)->where('company_idcompany', $company_idcompany)->first();
+        $contract = Contract::where('idcontract', $contract)->where('users_idusers', $user->idusers)->first();
+
+
+        if (!$contract) {
             return response()->json(['error' => true], 200);
-
         }
+        if (!$token = auth()->attempt($credentials)) {
+            return response()->json(['error' => true], 200);
+        }
+
         return $this->respondWithToken($token);
     }
     /**

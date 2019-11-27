@@ -50,7 +50,6 @@ class User extends Authenticatable implements JWTSubject
 
     public function contracts_user()
     {
-        return $this->hasMany(Contract::class, 'users_idusers');
-
+        return $this->hasMany(Contract::class, 'users_idusers', 'idusers');
     }
 }

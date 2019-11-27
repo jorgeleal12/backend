@@ -16,6 +16,8 @@ class WorkController extends Controller
     }
     public function create(Request $request)
     {
+        $idcompany      = $request->input("idcompany");
+        $idcontract      = $request->input("idcontract");
         $csc      = $request->input("csc");
         $dni      = $request->input("dni");
         $client   = $request->input("client");
@@ -87,6 +89,8 @@ class WorkController extends Controller
                 'datem'        => $datem,
                 'typework_id'  => $type,
                 'statework_id' => $state,
+                'idcompany'  => $idcompany,
+                'idcontract' => $idcontract,
 
             ]);
         return response()->json(['status' => 'ok', 'response' => $insert], 200);

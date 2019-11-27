@@ -10,4 +10,9 @@ class Contract extends Model
     protected $fillable = [
         'idcontract_user', 'users_idusers', 'idcontract',
     ];
+
+    public function user()
+    {
+        return $this->hasMany(User::class, 'idusers', 'users_idusers');
+    }
 }
