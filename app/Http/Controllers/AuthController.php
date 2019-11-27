@@ -16,8 +16,10 @@ class AuthController extends Controller
      */
     public function login()
     {
-        $credentials = request(['id', 'password']);
+        $credentials = request(['id', 'password', 'company_idcompany']);
+
         if (!$token = auth()->attempt($credentials)) {
+
             return response()->json(['error' => true], 200);
 
         }

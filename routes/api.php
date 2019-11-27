@@ -35,6 +35,7 @@ Route::group([
 
     Route::post('/contract/create', 'NewControllers\contract\ContractController@create');
     Route::post('/contract/searchs', 'NewControllers\contract\ContractController@searchs');
+    Route::post('/contract/onchangesearchs', 'NewControllers\contract\ContractController@onchangesearchs');
     Route::post('/contract/update', 'NewControllers\contract\ContractController@update');
     Route::post('/list/contract', 'NewControllers\contract\ContractController@search_contracts');
 
@@ -79,7 +80,6 @@ Route::group([
 
     Route::get('/work/search', 'NewControllers\Work\WorkController@search');
     Route::get('/work/search_name', 'NewControllers\Work\WorkController@search_name');
-
 
     /////////////////////////////////////////-------------------------------------///////////////////////////
 

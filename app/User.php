@@ -15,7 +15,8 @@ class User extends Authenticatable implements JWTSubject
      *
      * @var array
      */
-    protected $table    = 'users';
+    protected $table = 'users';
+
     protected $fillable = [
         'name', 'last_name', 'email', 'password', 'state', 'rol_idrol', 'company_idcompany', 'id', 'type', 'token_fir', 'token',
     ];
@@ -45,5 +46,11 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function contracts_user()
+    {
+        return $this->hasMany(Contract::class, 'users_idusers');
+
     }
 }
