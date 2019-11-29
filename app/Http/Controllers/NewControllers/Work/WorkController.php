@@ -16,22 +16,22 @@ class WorkController extends Controller
     }
     public function create(Request $request)
     {
-        $idcompany      = $request->input("idcompany");
-        $idcontract      = $request->input("idcontract");
-        $csc      = $request->input("csc");
-        $dni      = $request->input("dni");
-        $client   = $request->input("client");
-        $phone    = $request->input("phone");
-        $cel      = $request->input("cel");
-        $stratum  = $request->input("stratum"); //estrato
-        $province = $request->input("province"); //provincia
-        $adviser  = $request->input("adviser"); //asesor
-        $district = $request->input("district"); //distrito
-        $hub      = $request->input("hub");
-        $type     = $request->input("type");
-        $state    = $request->input("state");
-        $dater    = date('Y-m-d', strtotime($request->input("dater"))) == '1970-01-01' ? null : date('Y-m-d', strtotime($request->input("dater"))); //fecha de radicacion
-        $dayans   = $request->input("dayans"); //dias ans
+        $idcompany  = $request->input("idcompany");
+        $idcontract = $request->input("idcontract");
+        $csc        = $request->input("csc");
+        $dni        = $request->input("dni");
+        $client     = $request->input("client");
+        $phone      = $request->input("phone");
+        $cel        = $request->input("cel");
+        $stratum    = $request->input("stratum"); //estrato
+        $province   = $request->input("province"); //provincia
+        $adviser    = $request->input("adviser"); //asesor
+        $district   = $request->input("district"); //distrito
+        $hub        = $request->input("hub");
+        $type       = $request->input("type");
+        $state      = $request->input("state");
+        $dater      = date('Y-m-d', strtotime($request->input("dater"))) == '1970-01-01' ? null : date('Y-m-d', strtotime($request->input("dater"))); //fecha de radicacion
+        $dayans     = $request->input("dayans"); //dias ans
 
         $datev   = date('Y-m-d', strtotime($request->input("datev"))) == '1970-01-01' ? null : date('Y-m-d', strtotime($request->input("datev"))); //fecha de vencimiento
         $dateh   = date('Y-m-d', strtotime($request->input("dateh"))) == '1970-01-01' ? null : date('Y-m-d', strtotime($request->input("dateh"))); //fecha de habilitacion
@@ -89,8 +89,8 @@ class WorkController extends Controller
                 'datem'        => $datem,
                 'typework_id'  => $type,
                 'statework_id' => $state,
-                'idcompany'  => $idcompany,
-                'idcontract' => $idcontract,
+                'idcompany'    => $idcompany,
+                'idcontract'   => $idcontract,
 
             ]);
         return response()->json(['status' => 'ok', 'response' => $insert], 200);
@@ -182,7 +182,14 @@ class WorkController extends Controller
             ->join('typework', 'typework.idtypework', '=', 'work.typework_id')
 
         // ->orderBy('csc', 'asc')
-            ->select()
+            ->select('work.*', 'statework.*', 'typework.*', DB::raw("(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=work.adviser) AS nameadviser")
+                , DB::raw("(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=work.cosntructor) AS nameconstructor")
+                , DB::raw("(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=work.tecnico1) AS nametecnico1")
+                , DB::raw("(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=work.enabler) AS nameenable")
+                , DB::raw("(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=work.programmed) AS nameprogrammed")
+                , DB::raw("(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=work.supervisor) AS namesupervisor")
+                , DB::raw("(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=work.technical) AS nametechnical")
+                , DB::raw("(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=work.assistant) AS nameassistant"))
             ->paginate(10);
 
         return response()->json(['status' => 'ok', 'response' => $search], 200);
