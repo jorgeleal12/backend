@@ -83,6 +83,11 @@ Route::group([
     Route::post('/work/check', 'NewControllers\Work\ImportController@check');
     Route::post('/work/dataimport', 'NewControllers\Work\ImportController@dataimport');
 
+    
+    Route::post('/inspection/create', 'NewControllers\Inspection\InspectionController@create');
+    Route::post('/inspection/update', 'NewControllers\Inspection\InspectionController@update');
+    Route::get('/inspection/search', 'NewControllers\Inspection\InspectionController@search');
+    
     /////////////////////////////////////////-------------------------------------///////////////////////////
 
     Route::post('/list/list_eps', 'NewControllers\lists\ListController@list_eps');
