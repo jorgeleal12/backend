@@ -35,6 +35,7 @@ Route::group([
 
     Route::post('/contract/create', 'NewControllers\contract\ContractController@create');
     Route::post('/contract/searchs', 'NewControllers\contract\ContractController@searchs');
+    Route::post('/contracts/list_contract', 'NewControllers\contract\ContractController@list_contract');
     Route::post('/contract/onchangesearchs', 'NewControllers\contract\ContractController@onchangesearchs');
     Route::post('/contract/update', 'NewControllers\contract\ContractController@update');
     Route::post('/list/contract', 'NewControllers\contract\ContractController@search_contracts');
@@ -80,6 +81,8 @@ Route::group([
 
     Route::get('/work/search', 'NewControllers\Work\WorkController@search');
     Route::get('/work/search_name', 'NewControllers\Work\WorkController@search_name');
+    Route::get('/work/search_dni', 'NewControllers\Work\WorkController@search_dni');
+    Route::get('/work/search_hub', 'NewControllers\Work\WorkController@search_hub');
     Route::post('/work/check', 'NewControllers\Work\ImportController@check');
     Route::post('/work/dataimport', 'NewControllers\Work\ImportController@dataimport');
 
@@ -89,6 +92,12 @@ Route::group([
     Route::get('/inspection/search', 'NewControllers\Inspection\InspectionController@search');
     
     /////////////////////////////////////////-------------------------------------///////////////////////////
+
+    Route::get('/list/list_company', 'NewControllers\lists\ListController@list_company');
+
+
+
+    //-------------------------------------------------///---------------------------------//---------------
 
     Route::post('/list/list_eps', 'NewControllers\lists\ListController@list_eps');
     Route::post('/list/list_arl', 'NewControllers\lists\ListController@list_arl');
