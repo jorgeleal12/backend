@@ -17,6 +17,9 @@ Route::group([
     Route::post('login', 'AuthController@login');
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
+    Route::post('reset', 'Auth\PasswordResetController@reset');
+    Route::post('create', 'Auth\PasswordResetController@create');
+    Route::get('find/{token}', 'Auth\PasswordResetController@find');
     Route::post('me', 'AuthController@me');
     Route::post('prueba', 'AuthController@prueba');
     Route::post('/user/permission/create', 'NewControllers\user\management\PermissionController@create');
@@ -83,11 +86,10 @@ Route::group([
     Route::post('/work/check', 'NewControllers\Work\ImportController@check');
     Route::post('/work/dataimport', 'NewControllers\Work\ImportController@dataimport');
 
-    
     Route::post('/inspection/create', 'NewControllers\Inspection\InspectionController@create');
     Route::post('/inspection/update', 'NewControllers\Inspection\InspectionController@update');
     Route::get('/inspection/search', 'NewControllers\Inspection\InspectionController@search');
-    
+
     /////////////////////////////////////////-------------------------------------///////////////////////////
 
     Route::post('/list/list_eps', 'NewControllers\lists\ListController@list_eps');
