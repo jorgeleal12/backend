@@ -30,6 +30,7 @@ class ContractController extends Controller {
     }
 
     public function list_contract( Request $request ) {
+        
         $company = $request->input( 'company' );
 
         $search = DB::table( 'contract' )
