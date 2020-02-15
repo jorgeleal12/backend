@@ -97,8 +97,6 @@ Route::group([
 
     Route::get('/list/list_company', 'NewControllers\lists\ListController@list_company');
 
-
-
     //-------------------------------------------------///---------------------------------//---------------
 
     Route::post('/list/list_eps', 'NewControllers\lists\ListController@list_eps');
@@ -235,4 +233,10 @@ Route::group([
     Route::post('/import/import', 'NewControllers\odi\ImporController@import');
 
     Route::post('/programming/search', 'NewControllers\odi\ProgrammingController@search');
+
+    ///---------------------------actividades-------------------------------------------
+    Route::post('/activities/create', 'NewControllers\operation\ActitiviControllers\ActivitiController@create');
+    Route::post('/activities/search', 'NewControllers\operation\ActitiviControllers\ActivitiController@search');
+    Route::post('/activities/update', 'NewControllers\operation\ActitiviControllers\ActivitiController@update');
+
 });
