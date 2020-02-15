@@ -238,5 +238,6 @@ Route::group([
     Route::post('/activities/create', 'NewControllers\operation\ActitiviControllers\ActivitiController@create');
     Route::post('/activities/search', 'NewControllers\operation\ActitiviControllers\ActivitiController@search');
     Route::post('/activities/update', 'NewControllers\operation\ActitiviControllers\ActivitiController@update');
+    Route::post('/activities/delete', 'NewControllers\operation\ActitiviControllers\ActivitiController@delete');
 
 });
