@@ -61,4 +61,17 @@ class AutocompleteController extends Controller
 
         return response()->json(['status' => 'ok', 'response' => $search], 200);
     }
+
+    public function autocomplete_activities(Request $request)
+    {
+        $name = $request->input("name");
+
+        $search = DB::table('activities')
+            ->where('name_activitie', 'like', $name . '%')
+            ->select('activities.*')
+            ->take(10)
+            ->get();
+
+        return response()->json(['status' => 'ok', 'response' => $search], 200);
+    }
 }
