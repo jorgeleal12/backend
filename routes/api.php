@@ -25,7 +25,9 @@ Route::group([
     Route::post('/user/permission/create', 'NewControllers\user\management\PermissionController@create');
     Route::post('/user/permission/search', 'NewControllers\user\management\PermissionController@search');
     Route::post('/user/permission/update', 'NewControllers\user\management\PermissionController@update');
+    Route::post('/user/permission/delete', 'NewControllers\user\management\PermissionController@delete');
     Route::post('/user/rol/create', 'NewControllers\user\management\PermissionController@create_rol');
+    Route::post('/user/rol/delete_rol', 'NewControllers\user\management\PermissionController@delete_rol');
     Route::post('/user/rol/searchs', 'NewControllers\user\management\PermissionController@searchs');
     Route::post('/user/rol/search', 'NewControllers\user\management\PermissionController@search_rol');
     Route::post('/user/rol/update_rol', 'NewControllers\user\management\PermissionController@update_rol');
@@ -239,6 +241,10 @@ Route::group([
     Route::post('/activities/search', 'NewControllers\operation\ActitiviControllers\ActivitiController@search');
     Route::post('/activities/update', 'NewControllers\operation\ActitiviControllers\ActivitiController@update');
     Route::post('/activities/delete', 'NewControllers\operation\ActitiviControllers\ActivitiController@delete');
+    Route::post('/activities/save_activities', 'NewControllers\operation\ActitiviControllers\ActivitiController@save_activities');
+    Route::post('/activities/search_activities', 'NewControllers\operation\ActitiviControllers\ActivitiController@search_activities');
+
+
     Route::get('/autocomplete/autocomplete_activities', 'NewControllers\autocomplete\AutocompleteController@autocomplete_activities');
 
 });
