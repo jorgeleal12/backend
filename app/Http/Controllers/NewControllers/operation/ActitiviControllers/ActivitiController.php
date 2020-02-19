@@ -142,4 +142,15 @@ class ActivitiController extends Controller {
 
         return response()->json( ['status' => 'ok', 'response' => $search], 200 );
     }
+
+    public function delete_activities( Request $request ) {
+
+        $idactivities_obr = $request->idactivities_obr;
+        $delete = DB::table( 'activities_obr' )
+        ->where( 'idactivities_obr', $idactivities_obr )
+        ->delete();
+
+        return response()->json( ['status' => 'ok', 'response' => true], 200 );
+
+    }
 }

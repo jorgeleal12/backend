@@ -244,6 +244,7 @@ Route::group([
     Route::post('/activities/save_activities', 'NewControllers\operation\ActitiviControllers\ActivitiController@save_activities');
     Route::post('/activities/search_activities', 'NewControllers\operation\ActitiviControllers\ActivitiController@search_activities');
     Route::post('/activities/search_activities', 'NewControllers\operation\ActitiviControllers\ActivitiController@search_activities');
+    Route::post('/activities/delete_activities', 'NewControllers\operation\ActitiviControllers\ActivitiController@delete_activities');
 
     Route::post('/report/obra', 'NewControllers\report\ReportController@ReportObra');
 
