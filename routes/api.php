@@ -243,8 +243,8 @@ Route::group([
     Route::post('/activities/delete', 'NewControllers\operation\ActitiviControllers\ActivitiController@delete');
     Route::post('/activities/save_activities', 'NewControllers\operation\ActitiviControllers\ActivitiController@save_activities');
     Route::post('/activities/search_activities', 'NewControllers\operation\ActitiviControllers\ActivitiController@search_activities');
+    Route::post('/activities/search_activities', 'NewControllers\operation\ActitiviControllers\ActivitiController@search_activities');
 
-
-    Route::get('/autocomplete/autocomplete_activities', 'NewControllers\autocomplete\AutocompleteController@autocomplete_activities');
+    Route::post('/report/obra', 'NewControllers\report\ReportController@ReportObra');
 
 });
