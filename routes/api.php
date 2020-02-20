@@ -115,6 +115,8 @@ Route::group([
     Route::post('/list/list_typework', 'NewControllers\lists\ListController@list_typework');
     Route::post('/list/list_statework', 'NewControllers\lists\ListController@list_statework');
 
+    Route::post('/contract/list_contract_params', 'NewControllers\lists\ListController@list_contract_params');
+
     Route::post('/odi/create', 'NewControllers\odi\OdiController@create');
     Route::post('/odi/update', 'NewControllers\odi\OdiController@update');
 

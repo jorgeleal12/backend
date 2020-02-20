@@ -6,123 +6,119 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ListController extends Controller
-{
+class ListController extends Controller {
     //
 
-    public function list_eps(Request $request)
-    {
-        $search = DB::table('eps')
-            ->get();
+    public function list_eps( Request $request ) {
+        $search = DB::table( 'eps' )
+        ->get();
 
-        return response()->json(['status' => 'ok', 'response' => $search], 200);
+        return response()->json( ['status' => 'ok', 'response' => $search], 200 );
     }
 
-    public function list_arl(Request $request)
-    {
-        $search = DB::table('arl')
-            ->get();
+    public function list_arl( Request $request ) {
+        $search = DB::table( 'arl' )
+        ->get();
 
-        return response()->json(['status' => 'ok', 'response' => $search], 200);
+        return response()->json( ['status' => 'ok', 'response' => $search], 200 );
     }
 
-    public function list_pension(Request $request)
-    {
-        $search = DB::table('pension')
-            ->get();
+    public function list_pension( Request $request ) {
+        $search = DB::table( 'pension' )
+        ->get();
 
-        return response()->json(['status' => 'ok', 'response' => $search], 200);
+        return response()->json( ['status' => 'ok', 'response' => $search], 200 );
     }
 
-    public function list_service(Request $request)
-    {
-        $search = DB::table('type_service')
-            ->get();
+    public function list_service( Request $request ) {
+        $search = DB::table( 'type_service' )
+        ->get();
 
-        return response()->json(['status' => 'ok', 'response' => $search], 200);
+        return response()->json( ['status' => 'ok', 'response' => $search], 200 );
     }
 
-    public function list_photos(Request $request)
-    {
-        $search = DB::table('photos')
-            ->get();
+    public function list_photos( Request $request ) {
+        $search = DB::table( 'photos' )
+        ->get();
 
-        return response()->json(['status' => 'ok', 'response' => $search], 200);
+        return response()->json( ['status' => 'ok', 'response' => $search], 200 );
     }
 
-    public function list_ubigeos(Request $request)
-    {
+    public function list_ubigeos( Request $request ) {
 
-        $search = DB::table('provinces')
-            ->get();
+        $search = DB::table( 'provinces' )
+        ->get();
 
-        return response()->json(['status' => 'ok', 'response' => $search], 200);
+        return response()->json( ['status' => 'ok', 'response' => $search], 200 );
     }
 
-    public function list_provinces(Request $request)
-    {
+    public function list_provinces( Request $request ) {
         $id_departamento = $request->id_departamento;
 
-        $search = DB::table('district')
-            ->where('provinces_idprovinces', $id_departamento)
-            ->get();
+        $search = DB::table( 'district' )
+        ->where( 'provinces_idprovinces', $id_departamento )
+        ->get();
 
-        return response()->json(['status' => 'ok', 'response' => $search], 200);
+        return response()->json( ['status' => 'ok', 'response' => $search], 200 );
     }
 
-    public function list_municipality(Request $request)
-    {
-        $id_departamento = $request->input('id_departamento');
-        $search          = DB::table('municipality')
-            ->where('id_departament', $id_departamento)
-            ->get();
+    public function list_municipality( Request $request ) {
+        $id_departamento = $request->input( 'id_departamento' );
+        $search          = DB::table( 'municipality' )
+        ->where( 'id_departament', $id_departamento )
+        ->get();
 
-        return response()->json(['status' => 'ok', 'response' => $search], 200);
+        return response()->json( ['status' => 'ok', 'response' => $search], 200 );
     }
 
-    public function list_type_network(Request $request)
-    {
-        $type = $request->input('type');
+    public function list_type_network( Request $request ) {
+        $type = $request->input( 'type' );
 
-        $search = DB::table('type_network')
-            ->where('type_service_idtype_service', $type)
-            ->get();
+        $search = DB::table( 'type_network' )
+        ->where( 'type_service_idtype_service', $type )
+        ->get();
 
-        return response()->json(['status' => 'ok', 'response' => $search], 200);
+        return response()->json( ['status' => 'ok', 'response' => $search], 200 );
     }
 
-    public function list_photos_service(Request $request)
-    {
-        $type_network_idtype_network = $request->input('type_network_idtype_network');
+    public function list_photos_service( Request $request ) {
+        $type_network_idtype_network = $request->input( 'type_network_idtype_network' );
 
-        $search = DB::table('photos_service')
-            ->join('photos', 'photos.idphotos', 'photos_service.photos_idphotos')
-            ->where('type_network_idtype_network', $type_network_idtype_network)
-            ->get();
-        return response()->json(['status' => 'ok', 'response' => $search], 200);
+        $search = DB::table( 'photos_service' )
+        ->join( 'photos', 'photos.idphotos', 'photos_service.photos_idphotos' )
+        ->where( 'type_network_idtype_network', $type_network_idtype_network )
+        ->get();
+        return response()->json( ['status' => 'ok', 'response' => $search], 200 );
     }
 
-    public function list_typework()
-    {
-        $search = DB::table('typework')
-            ->get();
+    public function list_typework() {
+        $search = DB::table( 'typework' )
+        ->get();
 
-        return response()->json(['status' => 'ok', 'response' => $search], 200);
+        return response()->json( ['status' => 'ok', 'response' => $search], 200 );
     }
 
-    public function list_statework()
-    {
-        $search = DB::table('statework')
-            ->get();
+    public function list_statework() {
+        $search = DB::table( 'statework' )
+        ->get();
 
-        return response()->json(['status' => 'ok', 'response' => $search], 200);
+        return response()->json( ['status' => 'ok', 'response' => $search], 200 );
     }
 
-    public function list_company()
-    {
-        $search = DB::table('company')
-            ->get();
+    public function list_company() {
+        $search = DB::table( 'company' )
+        ->get();
 
-        return response()->json(['status' => 'ok', 'response' => $search], 200);
+        return response()->json( ['status' => 'ok', 'response' => $search], 200 );
+    }
+
+    public function list_contract_params( Request $request ) {
+        $company_idcompany = $request->company_idcompany;
+
+        $search = DB::table( '' )
+        ->where( 'company_idcompany', $company_idcompany )
+        ->get();
+
+        return response()->json( ['status' => 'ok', 'response' => $search], 200 );
     }
 }
