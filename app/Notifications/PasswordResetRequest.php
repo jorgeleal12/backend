@@ -39,10 +39,10 @@ class PasswordResetRequest extends Notification
      */
     public function toMail($notifiable)
     {
-        $url = url('/api/find/' . $this->token);
+        $url = 'http://localhost:4200/resetpassword?token=' . $this->token;
         return (new MailMessage)
             ->line('You are receiving this email because we received a password reset request for your account.')
-            ->action('Reset Password', url($url))
+            ->action('Reset Password', $url)
             ->line('If you did not request a password reset, no further action is required.');
     }
 

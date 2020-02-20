@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Notifications\PasswordResetRequest;
-use App\Notifications\PasswordResetSuccess;
 use App\PasswordReset;
 use App\User;
 use Illuminate\Http\Request;
@@ -32,7 +31,7 @@ class PasswordResetController extends Controller
         $user = User::where('email', $request->email)->first();
         if (!$user) {
             return response()->json([
-                'message' => 'We can\'t find a user with that e-mail address.',
+                'message' => false,
             ], 404);
         }
 
@@ -53,7 +52,7 @@ class PasswordResetController extends Controller
         }
 
         return response()->json([
-            'message' => 'We have e-mailed your password reset link!',
+            'message' => true,
         ]);
     }
     /**
@@ -96,11 +95,11 @@ class PasswordResetController extends Controller
 
         $request->validate([
             'email'    => 'required|string|email',
-            'password' => 'required|string|confirmed',
+            'password' => 'required|string',
             'token'    => 'required|string',
         ]);
 
-        $passwordReset = User::where('remember_token', $request->token)->first();
+        $passwordReset = User::where('token', $request->token)->first();
         if (!$passwordReset) {
             return response()->json([
                 'message' => 'This password reset token is invalid.',
@@ -116,7 +115,7 @@ class PasswordResetController extends Controller
 
         $user->password = bcrypt($request->password);
         $user->save();
-        $passwordReset->delete();
+        // $passwordReset->delete();
         $user->notify(new PasswordResetSuccess($passwordReset));
         return response()->json($user);
     }

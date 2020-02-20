@@ -110,6 +110,8 @@ Route::group([
     Route::post('/list/list_type_network', 'NewControllers\lists\ListController@list_type_network');
     Route::post('/list/list_photos_service', 'NewControllers\lists\ListController@list_photos_service');
     Route::post('/list/list_ubigeos', 'NewControllers\lists\ListController@list_ubigeos');
+    Route::post('/list/list_provinces', 'NewControllers\lists\ListController@list_provinces');
+
     Route::post('/list/list_typework', 'NewControllers\lists\ListController@list_typework');
     Route::post('/list/list_statework', 'NewControllers\lists\ListController@list_statework');
 
