@@ -249,5 +249,5 @@ Route::group([
     Route::post('/activities/delete_activities', 'NewControllers\operation\ActitiviControllers\ActivitiController@delete_activities');
 
     Route::post('/report/obra', 'NewControllers\report\ReportController@ReportObra');
-
+    Route::get('/autocomplete/autocomplete_activities', 'NewControllers\autocomplete\AutocompleteController@autocomplete_activities');
 });
