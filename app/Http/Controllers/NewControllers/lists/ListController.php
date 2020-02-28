@@ -113,9 +113,10 @@ class ListController extends Controller {
     }
 
     public function list_contract_params( Request $request ) {
+
         $company_idcompany = $request->company_idcompany;
 
-        $search = DB::table( '' )
+        $search = DB::table( 'contract' )
         ->where( 'company_idcompany', $company_idcompany )
         ->get();
 
