@@ -6,274 +6,289 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class WorkController extends Controller {
+class WorkController extends Controller
+{
     //
 
-    public function __construct() {
-        $this->middleware( 'jwt', ['except' => ['login']] );
+    public function __construct()
+    {
+        $this->middleware('jwt', ['except' => ['login']]);
     }
 
-    public function create( Request $request ) {
-        $idcompany  = $request->input( 'idcompany' );
-        $idcontract = $request->input( 'idcontract' );
-        $csc        = $request->input( 'csc' );
-        $dni        = $request->input( 'dni' );
-        $client     = $request->input( 'client' );
-        $phone      = $request->input( 'phone' );
-        $cel        = $request->input( 'cel' );
-        $stratum    = $request->input( 'stratum' );
+    public function create(Request $request)
+    {
+        $idcompany  = $request->input('idcompany');
+        $idcontract = $request->input('idcontract');
+        $csc        = $request->input('csc');
+        $dni        = $request->input('dni');
+        $client     = $request->input('client');
+        $phone      = $request->input('phone');
+        $cel        = $request->input('cel');
+        $stratum    = $request->input('stratum');
         //estrato
-        $province   = $request->input( 'province' );
+        $province = $request->input('province');
         //provincia
-        $adviser    = $request->input( 'adviser' );
+        $adviser = $request->input('adviser');
         //asesor
-        $district   = $request->input( 'district' );
+
+        $address = $request->input('address');
+        //direccion
+        $district = $request->input('district');
         //distrito
-        $hub        = $request->input( 'hub' );
-        $type       = $request->input( 'type' );
-        $state      = $request->input( 'state' );
-        $dater      = date( 'Y-m-d', strtotime( $request->input( 'dater' ) ) ) == '1970-01-01' ? null : date( 'Y-m-d', strtotime( $request->input( 'dater' ) ) );
+        $hub   = $request->input('hub');
+        $type  = $request->input('type');
+        $state = $request->input('state');
+        $dater = date('Y-m-d', strtotime($request->input('dater'))) == '1970-01-01' ? null : date('Y-m-d', strtotime($request->input('dater')));
         //fecha de radicacion
-        $dayans     = $request->input( 'dayans' );
+        $dayans = $request->input('dayans');
         //dias ans
 
-        $datev   = date( 'Y-m-d', strtotime( $request->input( 'datev' ) ) ) == '1970-01-01' ? null : date( 'Y-m-d', strtotime( $request->input( 'datev' ) ) );
+        $datev = date('Y-m-d', strtotime($request->input('datev'))) == '1970-01-01' ? null : date('Y-m-d', strtotime($request->input('datev')));
         //fecha de vencimiento
-        $dateh   = date( 'Y-m-d', strtotime( $request->input( 'dateh' ) ) ) == '1970-01-01' ? null : date( 'Y-m-d', strtotime( $request->input( 'dateh' ) ) );
+        $dateh = date('Y-m-d', strtotime($request->input('dateh'))) == '1970-01-01' ? null : date('Y-m-d', strtotime($request->input('dateh')));
         //fecha de habilitacion
-        $fechaa  = date( 'Y-m-d', strtotime( $request->input( 'fechaa' ) ) ) == '1970-01-01' ? null : date( 'Y-m-d', strtotime( $request->input( 'fechaa' ) ) );
+        $fechaa = date('Y-m-d', strtotime($request->input('fechaa'))) == '1970-01-01' ? null : date('Y-m-d', strtotime($request->input('fechaa')));
         //fecha de Aprobacion
-        $fechac  = date( 'Y-m-d', strtotime( $request->input( 'fechac' ) ) ) == '1970-01-01' ? null : date( 'Y-m-d', strtotime( $request->input( 'fechac' ) ) );
+        $fechac = date('Y-m-d', strtotime($request->input('fechac'))) == '1970-01-01' ? null : date('Y-m-d', strtotime($request->input('fechac')));
         //fecha de Construcion
-        $fechatc = date( 'Y-m-d', strtotime( $request->input( 'fechatc' ) ) ) == '1970-01-01' ? null : date( 'Y-m-d', strtotime( $request->input( 'fechatc' ) ) );
+        $fechatc = date('Y-m-d', strtotime($request->input('fechatc'))) == '1970-01-01' ? null : date('Y-m-d', strtotime($request->input('fechatc')));
         //fecha de TC
 
-        $cosntructor = $request->input( 'cosntructor' );
-        $tecnico1    = $request->input( 'tecnico1' );
-        $enabler     = $request->input( 'enabler' );
+        $cosntructor = $request->input('cosntructor');
+        $tecnico1    = $request->input('tecnico1');
+        $enabler     = $request->input('enabler');
         //habilitador
-        $inspector   = $request->input( 'inspector' );
+        $inspector = $request->input('inspector');
         //inspector
-        $obsp        = $request->input( 'obsp' );
+        $obsp = $request->input('obsp');
         //obserbaciones peiddo
-        $obs         = $request->input( 'obs' );
+        $obs = $request->input('obs');
         //obserbaciones
 
-        $programmed     = $request->input( 'programmed' );
+        $programmed = $request->input('programmed');
         //programado a
-        $nameprogrammed = $request->input( 'nameprogrammed' );
+        $nameprogrammed = $request->input('nameprogrammed');
         //programado a
-        $dateinn        = date( 'Y-m-d', strtotime( $request->input( 'dateinn' ) ) ) == '1970-01-01' ? null : date( 'Y-m-d', strtotime( $request->input( 'dateinn' ) ) );
+        $dateinn = date('Y-m-d', strtotime($request->input('dateinn'))) == '1970-01-01' ? null : date('Y-m-d', strtotime($request->input('dateinn')));
         //fecha inn
-        $supervisor     = $request->input( 'supervisor' );
+        $supervisor = $request->input('supervisor');
         //supervisor
-        $namesupervisor = $request->input( 'namesupervisor' );
+        $namesupervisor = $request->input('namesupervisor');
         //supervisor
-        $technical      = $request->input( 'technical' );
+        $technical = $request->input('technical');
         //Tecnico constructor
-        $nametechnical  = $request->input( 'nametechnical' );
+        $nametechnical = $request->input('nametechnical');
         //Tecnico constructor
-        $assistant      = $request->input( 'assistant' );
+        $assistant = $request->input('assistant');
         //Auxiliar constructor
-        $nameassistant  = $request->input( 'nameassistant' );
+        $nameassistant = $request->input('nameassistant');
         //Auxiliar constructor
-        $datem          = date( 'Y-m-d', strtotime( $request->input( 'datem' ) ) ) == '1970-01-01' ? null : date( 'Y-m-d', strtotime( $request->input( 'datem' ) ) );
+        $datem = date('Y-m-d', strtotime($request->input('datem'))) == '1970-01-01' ? null : date('Y-m-d', strtotime($request->input('datem')));
         //Fecha mocha
 
-        $insert = DB::table( 'work' )
-        ->insertGetId( [
-            'dni'          => $dni,
-            'client'       => $client,
-            'phone'        => $phone,
-            'cel'          => $cel,
-            'stratum'      => $stratum,
-            'province'     => $province,
-            'adviser'      => $adviser,
-            'district'     => $district,
-            'hub'          => $hub,
-            'dater'        => $dater,
-            'dayans'       => $dayans,
-            'datev'        => $datev,
-            'dateh'        => $dateh,
-            'fechaa'       => $fechaa,
-            'fechac'       => $fechac,
-            'fechatc'      => $fechatc,
-            'cosntructor'  => $cosntructor,
-            'tecnico1'     => $tecnico1,
-            'enabler'      => $enabler,
-            'inspector'    => $inspector,
-            'obsp'         => $obsp,
-            'obs'          => $obs,
-            'programmed'   => $programmed,
-            'dateinn'      => $dateinn,
-            'supervisor'   => $supervisor,
-            'technical'    => $technical,
-            'assistant'    => $assistant,
-            'datem'        => $datem,
-            'typework_id'  => $type,
-            'statework_id' => $state,
-            'idcompany'    => $idcompany,
-            'idcontract'   => $idcontract,
+        $insert = DB::table('work')
+            ->insertGetId([
+                'dni'          => $dni,
+                'client'       => $client,
+                'phone'        => $phone,
+                'cel'          => $cel,
+                'stratum'      => $stratum,
+                'province'     => $province,
+                'adviser'      => $adviser,
+                'district'     => $district,
+                'hub'          => $hub,
+                'dater'        => $dater,
+                'dayans'       => $dayans,
+                'datev'        => $datev,
+                'dateh'        => $dateh,
+                'fechaa'       => $fechaa,
+                'fechac'       => $fechac,
+                'fechatc'      => $fechatc,
+                'cosntructor'  => $cosntructor,
+                'tecnico1'     => $tecnico1,
+                'enabler'      => $enabler,
+                'inspector'    => $inspector,
+                'obsp'         => $obsp,
+                'obs'          => $obs,
+                'programmed'   => $programmed,
+                'dateinn'      => $dateinn,
+                'supervisor'   => $supervisor,
+                'technical'    => $technical,
+                'assistant'    => $assistant,
+                'datem'        => $datem,
+                'typework_id'  => $type,
+                'statework_id' => $state,
+                'idcompany'    => $idcompany,
+                'idcontract'   => $idcontract,
+                'address'      => $address,
 
-        ] );
-        return response()->json( ['status' => 'ok', 'response' => $insert], 200 );
+            ]);
+        return response()->json(['status' => 'ok', 'response' => $insert], 200);
     }
 
-    public function update( Request $request ) {
-        $csc      = $request->input( 'csc' );
-        $dni      = $request->input( 'dni' );
-        $client   = $request->input( 'client' );
-        $phone    = $request->input( 'phone' );
-        $cel      = $request->input( 'cel' );
-        $stratum  = $request->input( 'stratum' );
+    public function update(Request $request)
+    {
+        $csc     = $request->input('csc');
+        $dni     = $request->input('dni');
+        $client  = $request->input('client');
+        $phone   = $request->input('phone');
+        $cel     = $request->input('cel');
+        $stratum = $request->input('stratum');
         //estrato
-        $province = $request->input( 'province' );
+        $province = $request->input('province');
         //provincia
-        $adviser  = $request->input( 'adviser' );
+        $adviser = $request->input('adviser');
         //asesor
-        $district = $request->input( 'district' );
+        $address = $request->input('address');
+        //direccion
+        $district = $request->input('district');
         //distrito
-        $hub      = $request->input( 'hub' );
-        $type     = $request->input( 'type' );
-        $state    = $request->input( 'state' );
-        $dater    = date( 'Y-m-d', strtotime( $request->input( 'dater' ) ) ) == '1970-01-01' ? null : date( 'Y-m-d', strtotime( $request->input( 'dater' ) ) );
+        $hub   = $request->input('hub');
+        $type  = $request->input('type');
+        $state = $request->input('state');
+        $dater = date('Y-m-d', strtotime($request->input('dater'))) == '1970-01-01' ? null : date('Y-m-d', strtotime($request->input('dater')));
         //fecha de radicacion
-        $dayans   = $request->input( 'dayans' );
+        $dayans = $request->input('dayans');
         //dias ans
 
-        $datev   = date( 'Y-m-d', strtotime( $request->input( 'datev' ) ) ) == '1970-01-01' ? null : date( 'Y-m-d', strtotime( $request->input( 'datev' ) ) );
+        $datev = date('Y-m-d', strtotime($request->input('datev'))) == '1970-01-01' ? null : date('Y-m-d', strtotime($request->input('datev')));
         //fecha de vencimiento
-        $dateh   = date( 'Y-m-d', strtotime( $request->input( 'dateh' ) ) ) == '1970-01-01' ? null : date( 'Y-m-d', strtotime( $request->input( 'dateh' ) ) );
+        $dateh = date('Y-m-d', strtotime($request->input('dateh'))) == '1970-01-01' ? null : date('Y-m-d', strtotime($request->input('dateh')));
         //fecha de habilitacion
-        $fechaa  = date( 'Y-m-d', strtotime( $request->input( 'fechaa' ) ) ) == '1970-01-01' ? null : date( 'Y-m-d', strtotime( $request->input( 'fechaa' ) ) );
+        $fechaa = date('Y-m-d', strtotime($request->input('fechaa'))) == '1970-01-01' ? null : date('Y-m-d', strtotime($request->input('fechaa')));
         //fecha de Aprobacion
-        $fechac  = date( 'Y-m-d', strtotime( $request->input( 'fechac' ) ) ) == '1970-01-01' ? null : date( 'Y-m-d', strtotime( $request->input( 'fechac' ) ) );
+        $fechac = date('Y-m-d', strtotime($request->input('fechac'))) == '1970-01-01' ? null : date('Y-m-d', strtotime($request->input('fechac')));
         //fecha de Construcion
-        $fechatc = date( 'Y-m-d', strtotime( $request->input( 'fechatc' ) ) ) == '1970-01-01' ? null : date( 'Y-m-d', strtotime( $request->input( 'fechatc' ) ) );
+        $fechatc = date('Y-m-d', strtotime($request->input('fechatc'))) == '1970-01-01' ? null : date('Y-m-d', strtotime($request->input('fechatc')));
         //fecha de TC
 
-        $cosntructor = $request->input( 'cosntructor' );
-        $tecnico1    = $request->input( 'tecnico1' );
-        $enabler     = $request->input( 'enabler' );
+        $cosntructor = $request->input('cosntructor');
+        $tecnico1    = $request->input('tecnico1');
+        $enabler     = $request->input('enabler');
         //habilitador
-        $inspector   = $request->input( 'inspector' );
+        $inspector = $request->input('inspector');
         //inspector
-        $obsp        = $request->input( 'obsp' );
+        $obsp = $request->input('obsp');
         //obserbaciones peiddo
-        $obs         = $request->input( 'obs' );
+        $obs = $request->input('obs');
         //obserbaciones
 
-        $programmed     = $request->input( 'programmed' );
+        $programmed = $request->input('programmed');
         //programado a
-        $nameprogrammed = $request->input( 'nameprogrammed' );
+        $nameprogrammed = $request->input('nameprogrammed');
         //programado a
-        $dateinn        = date( 'Y-m-d', strtotime( $request->input( 'dateinn' ) ) ) == '1970-01-01' ? null : date( 'Y-m-d', strtotime( $request->input( 'dateinn' ) ) );
+        $dateinn = date('Y-m-d', strtotime($request->input('dateinn'))) == '1970-01-01' ? null : date('Y-m-d', strtotime($request->input('dateinn')));
         //fecha inn
-        $supervisor     = $request->input( 'supervisor' );
+        $supervisor = $request->input('supervisor');
         //supervisor
-        $namesupervisor = $request->input( 'namesupervisor' );
+        $namesupervisor = $request->input('namesupervisor');
         //supervisor
-        $technical      = $request->input( 'technical' );
+        $technical = $request->input('technical');
         //Tecnico constructor
-        $nametechnical  = $request->input( 'nametechnical' );
+        $nametechnical = $request->input('nametechnical');
         //Tecnico constructor
-        $assistant      = $request->input( 'assistant' );
+        $assistant = $request->input('assistant');
         //Auxiliar constructor
-        $nameassistant  = $request->input( 'nameassistant' );
+        $nameassistant = $request->input('nameassistant');
         //Auxiliar constructor
-        $datem          = date( 'Y-m-d', strtotime( $request->input( 'datem' ) ) ) == '1970-01-01' ? null : date( 'Y-m-d', strtotime( $request->input( 'datem' ) ) );
+        $datem = date('Y-m-d', strtotime($request->input('datem'))) == '1970-01-01' ? null : date('Y-m-d', strtotime($request->input('datem')));
         //Fecha mocha
 
-        $update = DB::table( 'work' )
-        ->where( 'csc', $csc )
-        ->update( [
-            'dni'          => $dni,
-            'client'       => $client,
-            'phone'        => $phone,
-            'cel'          => $cel,
-            'stratum'      => $stratum,
-            'province'     => $province,
-            'adviser'      => $adviser,
-            'district'     => $district,
-            'hub'          => $hub,
-            'dater'        => $dater,
-            'dayans'       => $dayans,
-            'datev'        => $datev,
-            'dateh'        => $dateh,
-            'fechaa'       => $fechaa,
-            'fechac'       => $fechac,
-            'fechatc'      => $fechatc,
-            'cosntructor'  => $cosntructor,
-            'tecnico1'     => $tecnico1,
-            'enabler'      => $enabler,
-            'inspector'    => $inspector,
-            'obsp'         => $obsp,
-            'obs'          => $obs,
-            'programmed'   => $programmed,
-            'dateinn'      => $dateinn,
-            'supervisor'   => $supervisor,
-            'technical'    => $technical,
-            'assistant'    => $assistant,
-            'datem'        => $datem,
-            'typework_id'  => $type,
-            'statework_id' => $state,
+        $update = DB::table('work')
+            ->where('csc', $csc)
+            ->update([
+                'dni'          => $dni,
+                'client'       => $client,
+                'phone'        => $phone,
+                'cel'          => $cel,
+                'stratum'      => $stratum,
+                'province'     => $province,
+                'adviser'      => $adviser,
+                'district'     => $district,
+                'hub'          => $hub,
+                'dater'        => $dater,
+                'dayans'       => $dayans,
+                'datev'        => $datev,
+                'dateh'        => $dateh,
+                'fechaa'       => $fechaa,
+                'fechac'       => $fechac,
+                'fechatc'      => $fechatc,
+                'cosntructor'  => $cosntructor,
+                'tecnico1'     => $tecnico1,
+                'enabler'      => $enabler,
+                'inspector'    => $inspector,
+                'obsp'         => $obsp,
+                'obs'          => $obs,
+                'programmed'   => $programmed,
+                'dateinn'      => $dateinn,
+                'supervisor'   => $supervisor,
+                'technical'    => $technical,
+                'assistant'    => $assistant,
+                'datem'        => $datem,
+                'typework_id'  => $type,
+                'statework_id' => $state,
+                'address'      => $address,
 
-        ] );
-        return response()->json( ['status' => 'ok', 'response' => $update], 200 );
+            ]);
+        return response()->json(['status' => 'ok', 'response' => $update], 200);
     }
 
-    public function search() {
-        $search = DB::table( 'work' )
-        ->join( 'statework', 'statework.idstatework', '=', 'work.statework_id' )
-        ->join( 'typework', 'typework.idtypework', '=', 'work.typework_id' )
+    public function search()
+    {
+        $search = DB::table('work')
+            ->join('statework', 'statework.idstatework', '=', 'work.statework_id')
+            ->join('typework', 'typework.idtypework', '=', 'work.typework_id')
 
         // ->orderBy( 'csc', 'asc' )
-        ->select( 'work.*', 'statework.*', 'typework.*', DB::raw( "(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=work.adviser) AS nameadviser" )
-        , DB::raw( "(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=work.cosntructor) AS nameconstructor" )
-        , DB::raw( "(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=work.tecnico1) AS nametecnico1" )
-        , DB::raw( "(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=work.enabler) AS nameenable" )
-        , DB::raw( "(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=work.programmed) AS nameprogrammed" )
-        , DB::raw( "(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=work.supervisor) AS namesupervisor" )
-        , DB::raw( "(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=work.technical) AS nametechnical" )
-        , DB::raw( "(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=work.assistant) AS nameassistant" ) )
-        ->paginate( 10 );
+            ->select('work.*', 'statework.*', 'typework.*', DB::raw("(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=work.adviser) AS nameadviser")
+                , DB::raw("(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=work.cosntructor) AS nameconstructor")
+                , DB::raw("(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=work.tecnico1) AS nametecnico1")
+                , DB::raw("(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=work.enabler) AS nameenable")
+                , DB::raw("(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=work.programmed) AS nameprogrammed")
+                , DB::raw("(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=work.supervisor) AS namesupervisor")
+                , DB::raw("(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=work.technical) AS nametechnical")
+                , DB::raw("(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=work.assistant) AS nameassistant"))
+            ->paginate(10);
 
-        return response()->json( ['status' => 'ok', 'response' => $search], 200 );
+        return response()->json(['status' => 'ok', 'response' => $search], 200);
 
         // ->orderBy( 'idclient', 'asc' )
         //     ->select( 'client.*', 'client.state as idstate', DB::raw( '(CASE WHEN client.state = "1" THEN "Activo" WHEN client.state = "2" THEN "Inactivo" ELSE "Por confirmar" END) AS state' ) )
     }
 
-    public function search_name( Request $request ) {
-        $client = $request->input( 'name' );
+    public function search_name(Request $request)
+    {
+        $client = $request->input('name');
 
-        $search = DB::table( 'work' )
-        ->where( 'client', 'like',  $client . '%' )
-        ->orderBy( 'client', 'asc' )
-        ->paginate( 10 );
+        $search = DB::table('work')
+            ->where('client', 'like', $client . '%')
+            ->orderBy('client', 'asc')
+            ->paginate(10);
 
-        return response()->json( ['status' => 'ok', 'response' => $search], 200 );
+        return response()->json(['status' => 'ok', 'response' => $search], 200);
     }
 
-    public function search_dni( Request $request ) {
-        $dni = $request->input( 'dni' );
+    public function search_dni(Request $request)
+    {
+        $dni = $request->input('dni');
 
-        $search = DB::table( 'work' )
-        ->where( 'dni', 'like',  $dni . '%' )
-        ->orderBy( 'dni', 'asc' )
-        ->paginate( 10 );
+        $search = DB::table('work')
+            ->where('dni', 'like', $dni . '%')
+            ->orderBy('dni', 'asc')
+            ->paginate(10);
 
-        return response()->json( ['status' => 'ok', 'response' => $search], 200 );
+        return response()->json(['status' => 'ok', 'response' => $search], 200);
     }
 
-    public function search_hub( Request $request ) {
-        $hub = $request->input( 'hub' );
+    public function search_hub(Request $request)
+    {
+        $hub = $request->input('hub');
 
-        $search = DB::table( 'work' )
-        ->where( 'hub', 'like',  $hub . '%' )
-        ->orderBy( 'hub', 'asc' )
-        ->paginate( 10 );
+        $search = DB::table('work')
+            ->where('hub', 'like', $hub . '%')
+            ->orderBy('hub', 'asc')
+            ->paginate(10);
 
-        return response()->json( ['status' => 'ok', 'response' => $search], 200 );
+        return response()->json(['status' => 'ok', 'response' => $search], 200);
     }
 }
