@@ -70,6 +70,8 @@ Route::group([
     Route::post('/employee/search_pension', 'NewControllers\employee\EmployeeController@search_pension');
     Route::post('/employee/create_pension', 'NewControllers\employee\EmployeeController@create_pension');
     Route::post('/employee/delete_pension', 'NewControllers\employee\EmployeeController@delete_pension');
+    Route::post('/employee/upload_image', 'NewControllers\employee\EmployeeController@upload_image');
+
 
     //servicios o obras de gas
     /////////////////////////////////////////-------------------------------------///////////////////////////
@@ -250,6 +252,7 @@ Route::group([
     Route::post('/client/create', 'NewControllers\client\ClientController@create');
     Route::post('/client/create_account', 'NewControllers\client\ClientController@create_account');
     Route::post('/client/delete_account', 'NewControllers\client\ClientController@delete_account');
+    Route::post('/client/delete_client', 'NewControllers\client\ClientController@delete_client');
     Route::get('/client/search', 'NewControllers\client\ClientController@search');
     Route::get('/client/search_account', 'NewControllers\client\ClientController@search_account');
 });
