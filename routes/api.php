@@ -139,13 +139,6 @@ Route::group([
 
     Route::post('/odi/certficate_delete', 'NewControllers\odi\OdiController@certficate_delete');
 
-    Route::get('/autocomplete/autocomplete_certicate', 'NewControllers\autocomplete\AutocompleteController@autocomplete_certicate');
-    Route::post('/client/create', 'NewControllers\client\ClientController@create');
-    Route::post('/client/create_account', 'NewControllers\client\ClientController@create_account');
-    Route::post('/client/delete_account', 'NewControllers\client\ClientController@delete_account');
-    Route::get('/client/search', 'NewControllers\client\ClientController@search');
-    Route::post('/client/search_account', 'NewControllers\client\ClientController@search_account');
-
     Route::post('/movil/login', 'NewControllers\appmovil\AppMovilController@login');
     Route::post('/movil/totalasignadas', 'NewControllers\appmovil\AppMovilController@totalasignadas');
     Route::post('/movil/seach_asignadas', 'NewControllers\appmovil\AppMovilController@seach_asignadas');
@@ -252,4 +245,11 @@ Route::group([
 
     Route::post('/report/obra', 'NewControllers\report\ReportController@ReportObra');
     Route::get('/autocomplete/autocomplete_activities', 'NewControllers\autocomplete\AutocompleteController@autocomplete_activities');
+
+    Route::get('/autocomplete/autocomplete_certicate', 'NewControllers\autocomplete\AutocompleteController@autocomplete_certicate');
+    Route::post('/client/create', 'NewControllers\client\ClientController@create');
+    Route::post('/client/create_account', 'NewControllers\client\ClientController@create_account');
+    Route::post('/client/delete_account', 'NewControllers\client\ClientController@delete_account');
+    Route::get('/client/search', 'NewControllers\client\ClientController@search');
+    Route::get('/client/search_account', 'NewControllers\client\ClientController@search_account');
 });
