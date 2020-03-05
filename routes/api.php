@@ -255,4 +255,6 @@ Route::group([
     Route::post('/client/delete_client', 'NewControllers\client\ClientController@delete_client');
     Route::get('/client/search', 'NewControllers\client\ClientController@search');
     Route::get('/client/search_account', 'NewControllers\client\ClientController@search_account');
+    Route::get('/client/autocomplete', 'NewControllers\client\ClientController@autocomplete');
+    Route::get('/client/autocomplete_address', 'NewControllers\client\ClientController@autocomplete_address');
 });

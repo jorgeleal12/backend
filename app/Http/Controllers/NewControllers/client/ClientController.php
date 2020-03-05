@@ -139,4 +139,31 @@ class ClientController extends Controller {
 
         return response()->json( ['status' => 'ok', 'response' => $delete], 200 );
     }
+
+    public function autocomplete( Request $request ) {
+        $client = $request->client;
+
+        $search = DB::table( 'client' )
+        ->where( 'name_client', 'like', '%' . $client . '%' )
+        ->orWhere( 'id_client', 'like', '%' . $client . '%' )
+        ->select( 'client.*', DB::raw( 'CONCAT(client.name_client," ",client.last_name) AS full_name' ) )
+        ->take( 10 )
+        ->get();
+
+        return response()->json( ['status' => 'ok', 'response' => $search], 200 );
+    }
+
+    public function autocomplete_address( Request $request ) {
+        $address = $request->address;
+
+        $search = DB::table( 'client_account' )
+        ->where( 'address', 'like', '%' . $address . '%' )
+        ->leftjoin( 'client', 'client.idclient', 'client_account.client_idclient' )
+        ->leftjoin( 'municipality', 'municipality.idmunicipality', '=', 'client_account.city' )
+        ->select( 'client.*', 'client_account.*', 'municipality.name_municipality', DB::raw( 'CONCAT(client.name_client," ",client.last_name) AS full_name' ) )
+        ->take( 10 )
+        ->get();
+
+        return response()->json( ['status' => 'ok', 'response' => $search], 200 );
+    }
 }
