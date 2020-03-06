@@ -6,139 +6,158 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class InspectionController extends Controller {
+class InspectionController extends Controller
+{
     //
 
-    public function __construct() {
-        $this->middleware( 'jwt', ['except' => ['login']] );
+    public function __construct()
+    {
+        $this->middleware('jwt', ['except' => ['login']]);
     }
 
-    public function create( Request $request ) {
-        $csc              = $request->input( 'csc' );
-        $application_date = date( 'Y-m-d', strtotime( $request->input( 'application_date' ) ) ) == '1970-01-01' ? null : date( 'Y-m-d', strtotime( $request->input( 'application_date' ) ) );
+    public function create(Request $request)
+    {
+        $csc              = $request->input('csc');
+        $application_date = date('Y-m-d', strtotime($request->input('application_date'))) == '1970-01-01' ? null : date('Y-m-d', strtotime($request->input('application_date')));
         $who_request      = $request->who_request;
         $who_attends      = $request->who_attends;
         $address          = $request->address;
-        $phone            = $request->phone;
+        $phone_contact    = $request->phone_contact;
         $city             = $request->city;
         $neighborhood     = $request->neighborhood;
         $zone             = $request->zone;
         $value_review     = $request->value_review;
         $attention_day    = $request->attention_day;
 
-        $filed_call        = $request->filed_call;
-        $referred          = $request->referred;
-        $origin            = $request->origin;
-        $schedule_date     = date( 'Y-m-d', strtotime( $request->schedule_date ) ) == '1970-01-01' ? null : date( 'Y-m-d', strtotime( $request->schedule_date ) );
+        $filed_call    = $request->filed_call;
+        $referred      = $request->referred;
+        $origin        = $request->origin;
+        $schedule_date = date('Y-m-d', strtotime($request->schedule_date)) == '1970-01-01' ? null : date('Y-m-d', strtotime($request->schedule_date));
 
         $number_visits     = $request->number_visits;
         $installer_name    = $request->installer_name;
         $installation_code = $request->installation_code;
 
-        $type = $request->type;
-        $use = $request->use;
-        $gas_type = $request->gas_type;
+        $type         = $request->type;
+        $use          = $request->use;
+        $gas_type     = $request->gas_type;
         $discontinued = $request->discontinued;
-        $device = $request->device;
+        $device       = $request->device;
 
         $idaddress = $request->idaddress;
 
-        $insert = DB::table( 'inspecion' )
-        ->insertGetid( [
-            'csc'                   => $csc,
-            'application_date'      => $application_date,
-            'who_request'           => $who_request,
-            'who_attends'           => $who_attends,
-            'zone'                  => $zone,
-            'value_review'          => $value_review,
-            'attention_day'         => $attention_day,
-            'filed_call'            => $filed_call,
-            'referred'              => $referred,
-            'origin'                => $origin,
-            'schedule_date'         => $schedule_date,
-            'number_visits'         => $number_visits,
-            'installer_name'        => $installer_name,
-            'installation_code'     => $installation_code,
+        $insert = DB::table('inspecion')
+            ->insertGetid([
+                'csc'               => $csc,
+                'application_date'  => $application_date,
+                'who_request'       => $who_request,
+                'who_attends'       => $who_attends,
+                'zone'              => $zone,
+                'value_review'      => $value_review,
+                'attention_day'     => $attention_day,
+                'filed_call'        => $filed_call,
+                'referred'          => $referred,
+                'origin'            => $origin,
+                'schedule_date'     => $schedule_date,
+                'number_visits'     => $number_visits,
+                'installer_name'    => $installer_name,
+                'installation_code' => $installation_code,
 
-            'type'     => $type,
-            'use'     => $use,
-            'gas_type'     => $gas_type,
-            'discontinued'     => $discontinued,
-            'device'     => $device,
-            'idclient_account'     => $idaddress,
+                'type'              => $type,
+                'use'               => $use,
+                'gas_type'          => $gas_type,
+                'discontinued'      => $discontinued,
+                'device'            => $device,
+                'idclient_account'  => $idaddress,
+                'phone_contact'     => $phone_contact,
 
-        ] );
-        return response()->json( ['status' => 'ok', 'response' => true], 200 );
+            ]);
+        return response()->json(['status' => 'ok', 'response' => true], 200);
     }
 
-    public function update( Request $request ) {
-        $csc              = $request->input( 'csc' );
-        $application_date = date( 'Y-m-d', strtotime( $request->input( 'application_date' ) ) ) == '1970-01-01' ? null : date( 'Y-m-d', strtotime( $request->input( 'application_date' ) ) );
-        $who_request      = $request->input( 'who_request' );
-        $who_attends      = $request->input( 'who_attends' );
-        $address          = $request->input( 'address' );
-        $phone            = $request->input( 'phone' );
-        $city             = $request->input( 'city' );
-        $neighborhood     = $request->input( 'neighborhood' );
-        $zone             = $request->input( 'zone' );
-        $value_review     = $request->input( 'value_review' );
-        $attention_day    = $request->input( 'attention_day' );
+    public function update(Request $request)
+    {
+        $csc              = $request->input('csc');
+        $application_date = date('Y-m-d', strtotime($request->input('application_date'))) == '1970-01-01' ? null : date('Y-m-d', strtotime($request->input('application_date')));
+        $who_request      = $request->who_request;
+        $who_attends      = $request->who_attends;
+        $address          = $request->address;
+        $phone_contact    = $request->phone_contact;
+        $city             = $request->city;
+        $neighborhood     = $request->neighborhood;
+        $zone             = $request->zone;
+        $value_review     = $request->value_review;
+        $attention_day    = $request->attention_day;
 
-        $filed_call        = $request->input( 'filed_call' );
-        $referred          = $request->input( 'referred' );
-        $origin            = $request->input( 'origin' );
-        $schedule_date     = date( 'Y-m-d', strtotime( $request->input( 'schedule_date' ) ) ) == '1970-01-01' ? null : date( 'Y-m-d', strtotime( $request->input( 'schedule_date' ) ) );
-        $download_date     = date( 'Y-m-d', strtotime( $request->input( 'download_date' ) ) ) == '1970-01-01' ? null : date( 'Y-m-d', strtotime( $request->input( 'download_date' ) ) );
-        $number_visits     = $request->input( 'number_visits' );
-        $check_matrix      = $request->input( 'check_matrix' );
-        $installer_name    = $request->input( 'installer_name' );
-        $installation_code = $request->input( 'installation_code' );
+        $filed_call    = $request->filed_call;
+        $referred      = $request->referred;
+        $origin        = $request->origin;
+        $schedule_date = date('Y-m-d', strtotime($request->schedule_date)) == '1970-01-01' ? null : date('Y-m-d', strtotime($request->schedule_date));
 
-        $distribution_date     = date( 'Y-m-d', strtotime( $request->input( 'distribution_date' ) ) ) == '1970-01-01' ? null : date( 'Y-m-d', strtotime( $request->input( 'distribution_date' ) ) );
-        $distribution_date_two = date( 'Y-m-d', strtotime( $request->input( 'distribution_date_two' ) ) ) == '1970-01-01' ? null : date( 'Y-m-d', strtotime( $request->input( 'distribution_date_two' ) ) );
-        $sicerco_date          = date( 'Y-m-d', strtotime( $request->input( 'sicerco_date' ) ) ) == '1970-01-01' ? null : date( 'Y-m-d', strtotime( $request->input( 'sicerco_date' ) ) );
-        $epm_date              = date( 'Y-m-d', strtotime( $request->input( 'epm_date' ) ) ) == '1970-01-01' ? null : date( 'Y-m-d', strtotime( $request->input( 'epm_date' ) ) );
+        $number_visits     = $request->number_visits;
+        $installer_name    = $request->installer_name;
+        $installation_code = $request->installation_code;
 
-        $insert = DB::table( 'inspecion' )
-        ->where( 'csc', $csc )
-        ->update( [
-            'application_date'      => $application_date,
-            'who_request'           => $who_request,
-            'who_attends'           => $who_attends,
-            'address'               => $address,
-            'phone'                 => $phone,
-            'neighborhood'          => $neighborhood,
-            'zone'                  => $zone,
-            'value_review'          => $value_review,
-            'attention_day'         => $attention_day,
-            'filed_call'            => $filed_call,
-            'referred'              => $referred,
-            'origin'                => $origin,
-            'schedule_date'         => $schedule_date,
-            'download_date'         => $download_date,
-            'number_visits'         => $number_visits,
-            'check_matrix'          => $check_matrix,
-            'installer_name'        => $installer_name,
-            'installation_code'     => $installation_code,
-            'distribution_date'     => $distribution_date,
-            'distribution_date_two' => $distribution_date_two,
-            'sicerco_date'          => $sicerco_date,
-            'epm_date'              => $epm_date,
+        $type         = $request->type;
+        $use          = $request->use;
+        $gas_type     = $request->gas_type;
+        $discontinued = $request->discontinued;
+        $device       = $request->device;
 
-        ] );
-        return response()->json( ['status' => 'ok', 'response' => true], 200 );
+        $idaddress = $request->idaddress;
+
+        $insert = DB::table('inspecion')
+            ->where('csc', $csc)
+            ->update([
+
+                'application_date'  => $application_date,
+                'who_request'       => $who_request,
+                'who_attends'       => $who_attends,
+                'zone'              => $zone,
+                'value_review'      => $value_review,
+                'attention_day'     => $attention_day,
+                'filed_call'        => $filed_call,
+                'referred'          => $referred,
+                'origin'            => $origin,
+                'schedule_date'     => $schedule_date,
+                'number_visits'     => $number_visits,
+                'installer_name'    => $installer_name,
+                'installation_code' => $installation_code,
+
+                'type'              => $type,
+                'use'               => $use,
+                'gas_type'          => $gas_type,
+                'discontinued'      => $discontinued,
+                'device'            => $device,
+                'idclient_account'  => $idaddress,
+                'phone_contact'     => $phone_contact,
+
+            ]);
+        return response()->json(['status' => 'ok', 'response' => true], 200);
     }
 
-    public function search() {
+    public function search()
+    {
 
-        $search = DB::table( 'inspecion' )
-        ->leftjoin( 'client_account', 'client_account.idclient_account', 'inspecion.idclient_account' )
-        ->leftjoin( 'client', 'client.idclient', 'client_account.client_idclient' )
-        ->leftjoin( 'municipality', 'municipality.idmunicipality', '=', 'client_account.city' )
-        ->select()
-        ->paginate( 10 );
+        $search = DB::table('inspecion')
+            ->leftjoin('client_account', 'client_account.idclient_account', 'inspecion.idclient_account')
+            ->leftjoin('client', 'client.idclient', 'client_account.client_idclient')
+            ->leftjoin('municipality', 'municipality.idmunicipality', '=', 'client_account.city')
 
-        return response()->json( ['status' => 'ok', 'response' => $search], 200 );
+            ->select('inspecion.*', 'client_account.*', 'client.*', 'municipality.name_municipality',
+                DB::raw('(CASE WHEN inspecion.gas_type = "1" THEN "Natural"
+                      ELSE "Gpl" END) AS gastype'),
+                DB::raw('(CASE WHEN inspecion.use = "1" THEN "Residencial"
+                           WHEN inspecion.use = "2" THEN "Comercial"
+                          ELSE "Industrial" END) AS name_use'),
+
+                DB::raw('(CASE WHEN inspecion.type = "1" THEN "Previa"
+                          WHEN inspecion.use = "2" THEN "Periodica"
+                          WHEN inspecion.use = "3" THEN "PeriodiReformaca"
+                         ELSE "Solicitud del Usuario" END) AS name_type'))
+            ->paginate(10);
+
+        return response()->json(['status' => 'ok', 'response' => $search], 200);
 
     }
 }
