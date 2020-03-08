@@ -72,7 +72,6 @@ Route::group([
     Route::post('/employee/delete_pension', 'NewControllers\employee\EmployeeController@delete_pension');
     Route::post('/employee/upload_image', 'NewControllers\employee\EmployeeController@upload_image');
 
-
     //servicios o obras de gas
     /////////////////////////////////////////-------------------------------------///////////////////////////
     Route::post('/typework/create', 'NewControllers\administration\work\TypeController@create');
@@ -96,6 +95,7 @@ Route::group([
     Route::post('/inspection/create', 'NewControllers\Inspection\InspectionController@create');
     Route::post('/inspection/update', 'NewControllers\Inspection\InspectionController@update');
     Route::get('/inspection/search', 'NewControllers\Inspection\InspectionController@search');
+    Route::get('/inspection/search_cc', 'NewControllers\Inspection\InspectionController@search_cc');
 
     /////////////////////////////////////////-------------------------------------///////////////////////////
 
