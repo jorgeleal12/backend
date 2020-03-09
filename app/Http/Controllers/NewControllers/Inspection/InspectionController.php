@@ -156,17 +156,142 @@ class InspectionController extends Controller
 
                 DB::raw('(CASE WHEN inspecion.type = "1" THEN "Previa"
                           WHEN inspecion.use = "2" THEN "Periodica"
-                          WHEN inspecion.use = "3" THEN "PeriodiReformaca"
+                          WHEN inspecion.use = "3" THEN "Reformaca"
                          ELSE "Solicitud del Usuario" END) AS name_type'),
                 DB::raw("(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=inspecion.scheduled_to) AS name_scheduled_to"), )
-            ->paginate(10);
+            ->paginate(5);
 
         return response()->json(['status' => 'ok', 'response' => $search], 200);
 
     }
 
-    public function search_cc()
+    public function search_cc(Request $request)
     {
+        $cc = $request->cc;
 
+        $search = DB::table('inspecion')
+            ->leftjoin('client_account', 'client_account.idclient_account', 'inspecion.idclient_account')
+            ->leftjoin('client', 'client.idclient', 'client_account.client_idclient')
+            ->leftjoin('municipality', 'municipality.idmunicipality', '=', 'client_account.city')
+            ->where('client.id_client', 'like', $cc . '%')
+        // ->leftjoin( 'employees', 'employees.idemployees', '=', 'client_account.scheduled_to' )
+
+            ->select('inspecion.*', 'client_account.*', 'client.*', 'municipality.name_municipality',
+                DB::raw('(CASE WHEN inspecion.gas_type = "1" THEN "Natural"
+                  ELSE "Gpl" END) AS gastype'),
+                DB::raw('(CASE WHEN inspecion.use = "1" THEN "Residencial"
+                       WHEN inspecion.use = "2" THEN "Comercial"
+                      ELSE "Industrial" END) AS name_use'),
+
+                DB::raw('(CASE WHEN inspecion.type = "1" THEN "Previa"
+                      WHEN inspecion.use = "2" THEN "Periodica"
+                      WHEN inspecion.use = "3" THEN "Reformaca"
+                     ELSE "Solicitud del Usuario" END) AS name_type'),
+                DB::raw("(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=inspecion.scheduled_to) AS name_scheduled_to"), )
+            ->paginate(5);
+
+        return response()->json(['status' => 'ok', 'response' => $search], 200);
+    }
+
+    public function search_address(Request $request)
+    {
+        $address = $request->address;
+
+        $search = DB::table('inspecion')
+            ->leftjoin('client_account', 'client_account.idclient_account', 'inspecion.idclient_account')
+            ->leftjoin('client', 'client.idclient', 'client_account.client_idclient')
+            ->leftjoin('municipality', 'municipality.idmunicipality', '=', 'client_account.city')
+            ->where('client_account.address', 'like', $address . '%')
+        // ->leftjoin( 'employees', 'employees.idemployees', '=', 'client_account.scheduled_to' )
+
+            ->select('inspecion.*', 'client_account.*', 'client.*', 'municipality.name_municipality',
+                DB::raw('(CASE WHEN inspecion.gas_type = "1" THEN "Natural"
+                  ELSE "Gpl" END) AS gastype'),
+                DB::raw('(CASE WHEN inspecion.use = "1" THEN "Residencial"
+                       WHEN inspecion.use = "2" THEN "Comercial"
+                      ELSE "Industrial" END) AS name_use'),
+
+                DB::raw('(CASE WHEN inspecion.type = "1" THEN "Previa"
+                      WHEN inspecion.use = "2" THEN "Periodica"
+                      WHEN inspecion.use = "3" THEN "Reformaca"
+                     ELSE "Solicitud del Usuario" END) AS name_type'),
+                DB::raw("(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=inspecion.scheduled_to) AS name_scheduled_to"), )
+            ->paginate(5);
+
+        return response()->json(['status' => 'ok', 'response' => $search], 200);
+    }
+
+    public function search_client(Request $request)
+    {
+        $client = $request->client;
+
+        $search = DB::table('inspecion')
+            ->leftjoin('client_account', 'client_account.idclient_account', 'inspecion.idclient_account')
+            ->leftjoin('client', 'client.idclient', 'client_account.client_idclient')
+            ->leftjoin('municipality', 'municipality.idmunicipality', '=', 'client_account.city')
+            ->where('client.name_client', 'like', $client . '%')
+        // ->leftjoin( 'employees', 'employees.idemployees', '=', 'client_account.scheduled_to' )
+
+            ->select('inspecion.*', 'client_account.*', 'client.*', 'municipality.name_municipality',
+                DB::raw('(CASE WHEN inspecion.gas_type = "1" THEN "Natural"
+                  ELSE "Gpl" END) AS gastype'),
+                DB::raw('(CASE WHEN inspecion.use = "1" THEN "Residencial"
+                       WHEN inspecion.use = "2" THEN "Comercial"
+                      ELSE "Industrial" END) AS name_use'),
+
+                DB::raw('(CASE WHEN inspecion.type = "1" THEN "Previa"
+                      WHEN inspecion.use = "2" THEN "Periodica"
+                      WHEN inspecion.use = "3" THEN "Reformaca"
+                     ELSE "Solicitud del Usuario" END) AS name_type'),
+                DB::raw("(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=inspecion.scheduled_to) AS name_scheduled_to"), )
+            ->paginate(5);
+
+        return response()->json(['status' => 'ok', 'response' => $search], 200);
+    }
+
+    public function search_conse(Request $request)
+    {
+        $conse = $request->conse;
+
+        $search = DB::table('inspecion')
+            ->leftjoin('client_account', 'client_account.idclient_account', 'inspecion.idclient_account')
+            ->leftjoin('client', 'client.idclient', 'client_account.client_idclient')
+            ->leftjoin('municipality', 'municipality.idmunicipality', '=', 'client_account.city')
+            ->where('inspecion.csc', 'like', $conse . '%')
+        // ->leftjoin( 'employees', 'employees.idemployees', '=', 'client_account.scheduled_to' )
+
+            ->select('inspecion.*', 'client_account.*', 'client.*', 'municipality.name_municipality',
+                DB::raw('(CASE WHEN inspecion.gas_type = "1" THEN "Natural"
+                  ELSE "Gpl" END) AS gastype'),
+                DB::raw('(CASE WHEN inspecion.use = "1" THEN "Residencial"
+                       WHEN inspecion.use = "2" THEN "Comercial"
+                      ELSE "Industrial" END) AS name_use'),
+
+                DB::raw('(CASE WHEN inspecion.type = "1" THEN "Previa"
+                      WHEN inspecion.use = "2" THEN "Periodica"
+                      WHEN inspecion.use = "3" THEN "Reformaca"
+                     ELSE "Solicitud del Usuario" END) AS name_type'),
+                DB::raw("(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=inspecion.scheduled_to) AS name_scheduled_to"), )
+            ->paginate(5);
+
+        return response()->json(['status' => 'ok', 'response' => $search], 200);
+    }
+
+    public function create_certificate(Request $request)
+    {
+        $idcertificate=$request->idcertificate;
+        $inspection_date=$request->inspection_date;
+        $idcertificate=$request->idcertificate
+        $idcertificate=$request->idcertificate
+        $idcertificate=$request->idcertificate
+        $idcertificate=$request->idcertificate
+        $idcertificate=$request->idcertificate
+        $idcertificate=$request->idcertificate
+        $idcertificate=$request->idcertificate
+        $idcertificate=$request->idcertificate
+        $idcertificate=$request->idcertificate
+        $idcertificate=$request->idcertificate
+        $idcertificate=$request->idcertificate
+        $idcertificate=$request->idcertificate
     }
 }

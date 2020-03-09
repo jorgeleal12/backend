@@ -96,6 +96,11 @@ Route::group([
     Route::post('/inspection/update', 'NewControllers\Inspection\InspectionController@update');
     Route::get('/inspection/search', 'NewControllers\Inspection\InspectionController@search');
     Route::get('/inspection/search_cc', 'NewControllers\Inspection\InspectionController@search_cc');
+    Route::get('/inspection/search_address', 'NewControllers\Inspection\InspectionController@search_address');
+    Route::get('/inspection/search_client', 'NewControllers\Inspection\InspectionController@search_client');
+    Route::get('/inspection/search_conse', 'NewControllers\Inspection\InspectionController@search_conse');
+
+    Route::post('/inspection/certificate/create', 'NewControllers\Inspection\InspectionController@create_certificate');
 
     /////////////////////////////////////////-------------------------------------///////////////////////////
 
