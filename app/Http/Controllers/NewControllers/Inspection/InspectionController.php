@@ -208,7 +208,7 @@ class InspectionController extends Controller {
                       WHEN inspecion.use = "2" THEN "Periodica"
                       WHEN inspecion.use = "3" THEN "Reformaca"
                      ELSE "Solicitud del Usuario" END) AS name_type' ),
-        DB::raw( "(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=inspecion.scheduled_to) AS name_scheduled_to" ), )
+        DB::raw( "(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=inspecion.scheduled_to) AS name_scheduled_to" ) )
         ->paginate( 5 );
 
         return response()->json( ['status' => 'ok', 'response' => $search], 200 );
@@ -235,7 +235,7 @@ class InspectionController extends Controller {
                       WHEN inspecion.use = "2" THEN "Periodica"
                       WHEN inspecion.use = "3" THEN "Reformaca"
                      ELSE "Solicitud del Usuario" END) AS name_type' ),
-        DB::raw( "(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=inspecion.scheduled_to) AS name_scheduled_to" ), )
+        DB::raw( "(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=inspecion.scheduled_to) AS name_scheduled_to" ) )
         ->paginate( 5 );
 
         return response()->json( ['status' => 'ok', 'response' => $search], 200 );
@@ -262,7 +262,7 @@ class InspectionController extends Controller {
                       WHEN inspecion.use = "2" THEN "Periodica"
                       WHEN inspecion.use = "3" THEN "Reformaca"
                      ELSE "Solicitud del Usuario" END) AS name_type' ),
-        DB::raw( "(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=inspecion.scheduled_to) AS name_scheduled_to" ), )
+        DB::raw( "(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=inspecion.scheduled_to) AS name_scheduled_to" ) )
         ->paginate( 5 );
 
         return response()->json( ['status' => 'ok', 'response' => $search], 200 );
@@ -317,7 +317,7 @@ class InspectionController extends Controller {
         ->where( 'inspecion_csc', $inspecion_csc )
         ->select( 'certificate.*', DB::raw( '(CASE WHEN certificate.inspection_result = "1" THEN "Conforme"
               ELSE "No Conforme" END) AS rinspeccion' ),
-        DB::raw( "(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=certificate.inspector) AS name_inspector" ), )
+        DB::raw( "(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=certificate.inspector) AS name_inspector" ) )
         ->paginate( 5 );
 
         return response()->json( ['status' => 'ok', 'response' => $search], 200 );
