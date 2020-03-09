@@ -279,19 +279,19 @@ class InspectionController extends Controller
 
     public function create_certificate(Request $request)
     {
-        $idcertificate=$request->idcertificate;
-        $inspection_date=$request->inspection_date;
-        $idcertificate=$request->idcertificate
-        $idcertificate=$request->idcertificate
-        $idcertificate=$request->idcertificate
-        $idcertificate=$request->idcertificate
-        $idcertificate=$request->idcertificate
-        $idcertificate=$request->idcertificate
-        $idcertificate=$request->idcertificate
-        $idcertificate=$request->idcertificate
-        $idcertificate=$request->idcertificate
-        $idcertificate=$request->idcertificate
-        $idcertificate=$request->idcertificate
-        $idcertificate=$request->idcertificate
+        $idcertificate   = $request->idcertificate;
+        $inspection_date = $request->inspection_date;
+        $idcertificate   = $request->idcertificate;
+        $idcertificate   = $request->idcertificate;
+        $idcertificate   = $request->idcertificate;
+        $idcertificate   = $request->idcertificate;
+        $idcertificate   = $request->idcertificate;
+        $idcertificate   = $request->idcertificate;
+        $idcertificate   = $request->idcertificate;
+        $idcertificate   = $request->idcertificate;
+        $idcertificate   = $request->idcertificate;
+        $idcertificate   = $request->idcertificate;
+        $idcertificate   = $request->idcertificate;
+        $idcertificate   = $request->idcertificate;
     }
 }
