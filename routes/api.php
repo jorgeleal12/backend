@@ -101,6 +101,8 @@ Route::group([
     Route::get('/inspection/search_conse', 'NewControllers\Inspection\InspectionController@search_conse');
 
     Route::post('/inspection/certificate/create', 'NewControllers\Inspection\InspectionController@create_certificate');
+    Route::post('/inspection/Update_certificate/update', 'NewControllers\Inspection\InspectionController@Update_certificate');
+    Route::get('/inspection/certificate/search_certificate', 'NewControllers\Inspection\InspectionController@search_certificate');
 
     /////////////////////////////////////////-------------------------------------///////////////////////////
 
