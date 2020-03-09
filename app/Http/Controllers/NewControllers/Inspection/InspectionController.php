@@ -181,7 +181,7 @@ class InspectionController extends Controller {
                       WHEN inspecion.use = "2" THEN "Periodica"
                       WHEN inspecion.use = "3" THEN "Reformaca"
                      ELSE "Solicitud del Usuario" END) AS name_type' ),
-        DB::raw( "(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=inspecion.scheduled_to) AS name_scheduled_to" ), )
+        DB::raw( "(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=inspecion.scheduled_to) AS name_scheduled_to" ) )
         ->paginate( 5 );
 
         return response()->json( ['status' => 'ok', 'response' => $search], 200 );
