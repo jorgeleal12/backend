@@ -104,6 +104,9 @@ Route::group([
     Route::post('/inspection/Update_certificate/update', 'NewControllers\Inspection\InspectionController@Update_certificate');
     Route::get('/inspection/certificate/search_certificate', 'NewControllers\Inspection\InspectionController@search_certificate');
 
+    Route::get('/inspection/programming/search_programming', 'NewControllers\Inspection\InspectionController@search_programming');
+    Route::post('/inspection/programming/update', 'NewControllers\Inspection\InspectionController@update_programming');
+
     /////////////////////////////////////////-------------------------------------///////////////////////////
 
     Route::get('/list/list_company', 'NewControllers\lists\ListController@list_company');
