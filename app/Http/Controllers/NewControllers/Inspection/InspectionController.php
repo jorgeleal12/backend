@@ -428,4 +428,17 @@ class InspectionController extends Controller
 
         return response()->json(['status' => 'ok', 'response' => true], 200);
     }
+
+    public function search_images(Request $request)
+    {
+
+        $idcertificate = $request->idcertificate;
+        DB::statement(DB::raw('SET @rownum = 0'));
+        $search = DB::table('image_certificate')
+            ->where('certificate_idcertificate', $idcertificate)
+            ->select('image_certificate.*', DB::raw('@rownum := @rownum  as id'), )
+            ->paginate(5);
+        return response()->json(['status' => 'ok', 'response' => $search], 200);
+    }
+
 }
