@@ -433,12 +433,34 @@ class InspectionController extends Controller
     {
 
         $idcertificate = $request->idcertificate;
-        DB::statement(DB::raw('SET @rownum = 0'));
+
         $search = DB::table('image_certificate')
             ->where('certificate_idcertificate', $idcertificate)
-            ->select('image_certificate.*', DB::raw('@rownum := @rownum  as id'), )
+            ->select('image_certificate.*')
             ->paginate(5);
         return response()->json(['status' => 'ok', 'response' => $search], 200);
     }
+
+    public function delete_images( Request $request ) {
+
+        $idimage_certificate    = $request->idimage_certificate;
+        $url    = $request->url;
+        $name_image    = $request->name_image;
+        
+
+        $carpeta = public_path( '/public/' . $url . '/' . $name_image );
+
+        if ( file_exists( $carpeta ) ) {
+            $response = true;
+            $delete   = DB::table( 'image_certificate' )
+            ->where( 'idimage_certificate', $idimage_certificate )
+            ->delete();
+            File::delete( $carpeta );
+        } else {
+            $response = false;
+        }
+        return response()->json( ['status' => 'ok', 'response' => $response], 200 );
+    }
+
 
 }
