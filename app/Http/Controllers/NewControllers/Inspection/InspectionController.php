@@ -450,7 +450,7 @@ class InspectionController extends Controller
         $name_image          = $request->name_image;
 
         $carpeta = public_path('/public/' . $url . $name_image);
-        echo $carpeta;
+
         if (file_exists($carpeta)) {
             $response = true;
             $delete   = DB::table('image_certificate')
