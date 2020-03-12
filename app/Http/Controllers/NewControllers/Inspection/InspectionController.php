@@ -441,26 +441,25 @@ class InspectionController extends Controller
         return response()->json(['status' => 'ok', 'response' => $search], 200);
     }
 
-    public function delete_images( Request $request ) {
+    public function delete_images(Request $request)
+    {
 
-        $idimage_certificate    = $request->idimage_certificate;
-        $url    = $request->url;
-        $name_image    = $request->name_image;
-        
+        $idimage_certificate = $request->idimage_certificate;
+        $url                 = $request->url;
+        $name_image          = $request->name_image;
 
-        $carpeta = public_path( '/public/' . $url . '/' . $name_image );
-
-        if ( file_exists( $carpeta ) ) {
+        $carpeta = public_path('/public/' . $url . '/' . $name_image);
+        echo $carpeta;
+        if (file_exists($carpeta)) {
             $response = true;
-            $delete   = DB::table( 'image_certificate' )
-            ->where( 'idimage_certificate', $idimage_certificate )
-            ->delete();
-            File::delete( $carpeta );
+            $delete   = DB::table('image_certificate')
+                ->where('idimage_certificate', $idimage_certificate)
+                ->delete();
+            File::delete($carpeta);
         } else {
             $response = false;
         }
-        return response()->json( ['status' => 'ok', 'response' => $response], 200 );
+        return response()->json(['status' => 'ok', 'response' => $response], 200);
     }
-
 
 }
