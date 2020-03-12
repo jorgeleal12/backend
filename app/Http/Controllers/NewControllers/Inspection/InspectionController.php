@@ -448,7 +448,7 @@ class InspectionController extends Controller
         $url                 = $request->url;
         $name_image          = $request->name_image;
 
-        $carpeta = public_path('/public/' . $url . '/' . $name_image);
+        $carpeta = public_path('/public/' . $url . $name_image);
         echo $carpeta;
         if (file_exists($carpeta)) {
             $response = true;
