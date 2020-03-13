@@ -48,6 +48,7 @@ class InspectionController extends Controller
         $idaddress    = $request->idaddress;
         $scheduled_to = $request->scheduled_to;
         $state        = $request->state;
+        $obsp         = $request->obsp;
 
         $insert = DB::table('inspecion')
             ->insertGetid([
@@ -75,6 +76,7 @@ class InspectionController extends Controller
                 'phone_contact'     => $phone_contact,
                 'scheduled_to'      => $scheduled_to,
                 'state'             => $state,
+                'obsp'              => $obsp,
 
             ]);
         return response()->json(['status' => 'ok', 'response' => true, 'result' => $insert], 200);
@@ -112,6 +114,7 @@ class InspectionController extends Controller
         $idaddress    = $request->idaddress;
         $scheduled_to = $request->scheduled_to;
         $state        = $request->state;
+        $obsp         = $request->obsp;
 
         $update = DB::table('inspecion')
             ->where('csc', $csc)
@@ -140,6 +143,7 @@ class InspectionController extends Controller
                 'phone_contact'     => $phone_contact,
                 'scheduled_to'      => $scheduled_to,
                 'state'             => $state,
+                'obsp'              => $obsp,
             ]);
         return response()->json(['status' => 'ok', 'response' => true], 200);
     }

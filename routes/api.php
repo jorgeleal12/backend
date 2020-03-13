@@ -72,7 +72,10 @@ Route::group([
     Route::post('/employee/delete_pension', 'NewControllers\employee\EmployeeController@delete_pension');
     Route::post('/employee/upload_image', 'NewControllers\UploadImage\UploadController@upload_image');
 
-
+    Route::post('/employee/create_charges', 'NewControllers\employee\EmployeeController@create_charges');
+    Route::post('/employee/update_charges', 'NewControllers\employee\EmployeeController@update_charges');
+    Route::get('/employee/search_charges', 'NewControllers\employee\EmployeeController@search_charges');
+    Route::post('/employee/delete_charges', 'NewControllers\employee\EmployeeController@delete_charges');
     //servicios o obras de gas
     /////////////////////////////////////////-------------------------------------///////////////////////////
     Route::post('/typework/create', 'NewControllers\administration\work\TypeController@create');
@@ -132,6 +135,7 @@ Route::group([
 
     Route::post('/list/list_typework', 'NewControllers\lists\ListController@list_typework');
     Route::post('/list/list_statework', 'NewControllers\lists\ListController@list_statework');
+    Route::post('/list/list_charge', 'NewControllers\lists\ListController@list_charge');
 
     Route::post('/contract/list_contract_params', 'NewControllers\lists\ListController@list_contract_params');
 

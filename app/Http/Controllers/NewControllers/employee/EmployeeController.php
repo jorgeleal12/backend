@@ -26,12 +26,16 @@ class EmployeeController extends Controller
         $account_number = $request->input('account_number');
         // $birthdate               = $request->input( 'birthdate' );
         $birthdate               = date('Y-m-d', strtotime($request->input('birthdate'))) == '1969-12-31' ? null : date('Y-m-d', strtotime($request->input('birthdate')));
+        $date_admission          = date('Y-m-d', strtotime($request->date_admission)) == '1969-12-31' ? null : date('Y-m-d', strtotime($request->date_admission));
         $pension_idpension       = $request->input('pension_idpension');
         $arl_idarl               = $request->input('arl_idarl');
         $eps_ideps               = $request->input('eps_ideps');
         $city                    = $request->input('city');
         $department_iddepartment = $request->input('department_iddepartment');
         $phone_contact           = $request->input('phone_contact');
+
+        $state             = $request->state;
+        $charges_idcharges = $request->charges_idcharges;
 
         $search = DB::table('employees')
             ->where('identification', $identification)
@@ -62,6 +66,9 @@ class EmployeeController extends Controller
                 'city'                    => $city,
                 'department_iddepartment' => $department_iddepartment,
                 'phone_contact'           => $phone_contact,
+                'date_admission'          => $date_admission,
+                'state'                   => $state,
+                'charges_idcharges'       => $charges_idcharges,
 
             ]);
 
@@ -83,12 +90,16 @@ class EmployeeController extends Controller
         $account_type            = $request->input('account_type');
         $account_number          = $request->input('account_number');
         $birthdate               = date('Y-m-d', strtotime($request->input('birthdate'))) == '1969-12-31' ? null : date('Y-m-d', strtotime($request->input('birthdate')));
+        $date_admission          = date('Y-m-d', strtotime($request->date_admission)) == '1969-12-31' ? null : date('Y-m-d', strtotime($request->date_admission));
         $pension_idpension       = $request->input('pension_idpension');
         $arl_idarl               = $request->input('arl_idarl');
         $eps_ideps               = $request->input('eps_ideps');
         $city                    = $request->input('city');
         $department_iddepartment = $request->input('department_iddepartment');
         $phone_contact           = $request->input('phone_contact');
+
+        $state             = $request->state;
+        $charges_idcharges = $request->charges_idcharges;
 
         $insert = DB::table('employees')
             ->where('idemployees', $idemployees)
@@ -111,6 +122,10 @@ class EmployeeController extends Controller
                 'city'                    => $city,
                 'department_iddepartment' => $department_iddepartment,
                 'phone_contact'           => $phone_contact,
+
+                'date_admission'          => $date_admission,
+                'state'                   => $state,
+                'charges_idcharges'       => $charges_idcharges,
 
             ]);
 
@@ -267,6 +282,48 @@ class EmployeeController extends Controller
             ->delete();
 
         return response()->json(['status' => 'ok', 'response' => $delete], 200);
+    }
+
+    public function create_charges(Request $request)
+    {
+        $name_charge = $request->name_charge;
+        $idcharges   = $request->idcharges;
+
+        $insert = DB::table('charges')
+            ->insertGetid([
+                'name_charge' => $name_charge,
+            ]);
+        return response()->json(['status' => 'ok', 'response' => $insert], 200);
+    }
+
+    public function update_charges(Request $request)
+    {
+        $name_charge = $request->name_charge;
+        $idcharges   = $request->idcharges;
+
+        $update = DB::table('charges')
+            ->where('idcharges', $idcharges)
+            ->update([
+                'name_charge' => $name_charge,
+            ]);
+        return response()->json(['status' => 'ok', 'response' => $update], 200);
+    }
+
+    public function search_charges()
+    {
+        $search = DB::table('charges')
+            ->paginate(5);
+        return response()->json(['status' => 'ok', 'response' => $search], 200);
+    }
+
+    public function delete_charges(Request $request)
+    {
+        $idcharges = $request->idcharges;
+
+        $delete = DB::table('charges')
+            ->where('idcharges', $idcharges)
+            ->delete();
+        return response()->json(['status' => 'ok', 'response' => true], 200);
     }
 
 }
