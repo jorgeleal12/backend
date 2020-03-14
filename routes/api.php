@@ -112,7 +112,7 @@ Route::group([
     Route::post('/inspection/programming/update', 'NewControllers\Inspection\InspectionController@update_programming');
 
     Route::post('/inspection/upload_image_certificate', 'NewControllers\UploadImage\UploadController@upload_image_certificate');
-
+    Route::post('/inspection/upload_pdf_certificate', 'NewControllers\UploadImage\UploadController@upload_pdf_certificate');
     Route::get('/inspection/certificate/search_images', 'NewControllers\Inspection\InspectionController@search_images');
 
     Route::post('/inspection/delete_images', 'NewControllers\Inspection\InspectionController@delete_images');
