@@ -456,6 +456,19 @@ class InspectionController extends Controller
         return response()->json(['status' => 'ok', 'response' => $search], 200);
     }
 
+    public function search_pdf(Request $request)
+    {
+
+        $idcertificate = $request->idcertificate;
+
+        $search = DB::table('image_certificate')
+            ->where('certificate_idcertificate', $idcertificate)
+            ->where('pdf', 1)
+            ->select('image_certificate.*')
+            ->paginate(5);
+        return response()->json(['status' => 'ok', 'response' => $search], 200);
+    }
+
     public function delete_images(Request $request)
     {
 
