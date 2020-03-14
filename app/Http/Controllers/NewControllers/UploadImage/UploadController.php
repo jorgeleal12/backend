@@ -70,7 +70,7 @@ class UploadController extends Controller
         $type = $image["file"]['type'];
 
         $characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        $Typedoc    = preg_split('/', $name);
+        $Typedoc    = preg_split('.', $name);
         $strlength  = strlen($characters);
 
         $random = '';
@@ -120,7 +120,7 @@ class UploadController extends Controller
         $type = $image["file"]['type'];
 
         $characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        $Typedoc    = preg_split('/', $name);
+        $Typedoc    = preg_split('.', $name);
         $strlength  = strlen($characters);
 
         $random = '';
