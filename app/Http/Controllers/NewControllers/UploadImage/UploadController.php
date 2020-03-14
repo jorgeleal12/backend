@@ -57,6 +57,14 @@ class UploadController extends Controller
         $image         = $_FILES;
         $idcertificate = $request->idcertificate;
 
+        $search = DB::table('inspecion')
+            ->leftjoin('certificate', 'certificate.inspecion_csc', 'inspecion.csc')
+            ->where('idcertificate', $idcertificate)
+            ->first();
+
+        $id_inspection = $search->csc;
+        $idcontract    = $search->idcontract;
+
         $name = $image["file"]['name'];
         $file = $image["file"]['tmp_name'];
         $type = $image["file"]['type'];
@@ -71,22 +79,74 @@ class UploadController extends Controller
         }
 
         $namefile = $random . '.' . $Typedoc[1];
-        $carpeta  = public_path('/public/employee/images/');
+        $carpeta  = public_path('/public/inspection/' . $idcontract . '/' . $id_inspection . '/' . $idcertificate . '/');
 
         if (!File::exists($carpeta)) {
 
-            $path = public_path('/public/employee/images/');
+            $path = public_path('/public/inspection/' . $idcontract . '/' . $id_inspection . '/' . $idcertificate . '/');
             File::makeDirectory($path, 0777, true);
 
         }
+        $url = 'inspection/' . $idcontract . '/' . $id_inspection . '/' . $idcertificate . '/';
 
         move_uploaded_file($file, $carpeta . $namefile);
 
         $insert = DB::table('image_certificate')
             ->insert([
-                'url'                       => 'employee/images/',
+                'url'                       => $url,
                 'name'                      => $namefile,
                 'certificate_idcertificate' => $idcertificate,
+            ]);
+
+        return response()->json(['status' => 'ok', 'response' => true], 200);
+    }
+
+    public function upload_pdf_certificate(Request $request)
+    {
+
+        $image         = $_FILES;
+        $idcertificate = $request->idcertificate;
+
+        $search = DB::table('inspecion')
+            ->leftjoin('certificate', 'certificate.inspecion_csc', 'inspecion.csc')
+            ->where('idcertificate', $idcertificate)
+            ->first();
+
+        $id_inspection = $search->csc;
+        $idcontract    = $search->idcontract;
+
+        $name = $image["file"]['name'];
+        $file = $image["file"]['tmp_name'];
+        $type = $image["file"]['type'];
+
+        $characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        $Typedoc    = explode("/", $type);
+        $strlength  = strlen($characters);
+
+        $random = '';
+        for ($i = 0; $i < 15; $i++) {
+            $random .= $characters[rand(0, $strlength - 1)];
+        }
+
+        $namefile = $random . '.' . $Typedoc[1];
+        $carpeta  = public_path('/public/inspection/' . $idcontract . '/' . $id_inspection . '/' . $idcertificate . '/');
+
+        if (!File::exists($carpeta)) {
+
+            $path = public_path('/public/inspection/' . $idcontract . '/' . $id_inspection . '/' . $idcertificate . '/');
+            File::makeDirectory($path, 0777, true);
+
+        }
+        $url = 'inspection/' . $idcontract . '/' . $id_inspection . '/' . $idcertificate . '/';
+
+        move_uploaded_file($file, $carpeta . $namefile);
+
+        $insert = DB::table('image_certificate')
+            ->insert([
+                'url'                       => $url,
+                'name'                      => $namefile,
+                'certificate_idcertificate' => $idcertificate,
+                'pdf'                       => 1,
             ]);
 
         return response()->json(['status' => 'ok', 'response' => true], 200);
