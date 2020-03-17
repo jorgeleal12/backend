@@ -428,7 +428,7 @@ class InspectionController extends Controller
                 WHEN inspecion.state = "3" THEN "Atendido"
                ELSE "Cancelado" END) AS name_state')
             )
-            ->paginate(5);
+            ->paginate(10);
         }else{
             $search = DB::table('inspecion')
                 ->leftjoin('client_account', 'client_account.idclient_account', 'inspecion.idclient_account')
@@ -458,7 +458,7 @@ class InspectionController extends Controller
                     WHEN inspecion.state = "3" THEN "Atendido"
                    ELSE "Cancelado" END) AS name_state')
                 )
-                ->paginate(5);
+                ->paginate(10);
             }
        
 
@@ -501,7 +501,7 @@ class InspectionController extends Controller
                 WHEN inspecion.state = "3" THEN "Atendido"
                ELSE "Cancelado" END) AS name_state')
             )
-            ->paginate(5);
+            ->paginate(10);
         }else{
         $search = DB::table('inspecion')
             ->leftjoin('client_account', 'client_account.idclient_account', 'inspecion.idclient_account')
@@ -531,7 +531,7 @@ class InspectionController extends Controller
                 WHEN inspecion.state = "3" THEN "Atendido"
                ELSE "Cancelado" END) AS name_state')
             )
-            ->paginate(5);
+            ->paginate(10);
         }
         return response()->json(['status' => 'ok', 'response' => $search], 200);
     }
