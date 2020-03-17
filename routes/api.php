@@ -108,7 +108,8 @@ Route::group([
     Route::post('/inspection/Update_certificate/update', 'NewControllers\Inspection\InspectionController@Update_certificate');
     Route::get('/inspection/certificate/search_certificate', 'NewControllers\Inspection\InspectionController@search_certificate');
 
-    Route::get('/inspection/programming/search_programming', 'NewControllers\Inspection\InspectionController@search_programming');
+    Route::post('/inspection/programming/search_programming', 'NewControllers\Inspection\InspectionController@search_programming');
+    Route::get('/inspection/programming/search_programming_data', 'NewControllers\Inspection\InspectionController@search_programming_data');
     Route::post('/inspection/programming/update', 'NewControllers\Inspection\InspectionController@update_programming');
 
     Route::post('/inspection/upload_image_certificate', 'NewControllers\UploadImage\UploadController@upload_image_certificate');
