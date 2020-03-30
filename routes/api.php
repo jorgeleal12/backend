@@ -288,4 +288,9 @@ Route::group([
     Route::get('material/list_typeMaterial', 'NewControllers\material\MaterialController@list_typeMaterial');
     Route::get('material/search', 'NewControllers\material\MaterialController@search');
     Route::get('material/search_code', 'NewControllers\material\MaterialController@search_code');
+
+    Route::post('geolocation/medellin', 'NewControllers\Geolocation\GeolocationController@medellin');
+    Route::post('geolocation/geocodegoogle', 'NewControllers\Geolocation\GeolocationController@geocodegoogle');
+    Route::post('geolocation/geocode_dian', 'NewControllers\Geolocation\GeolocationController@geocode_dian');
+
 });
