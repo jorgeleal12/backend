@@ -138,9 +138,22 @@ class ListController extends Controller
         return response()->json(['status' => 'ok', 'response' => $search], 200);
     }
 
-    public function list_charge()
+    public function list_cellar()
     {
-        $search = DB::table('charges')
+        $search = DB::table('cellar')
+            ->get();
+
+        return response()->json(['status' => 'ok', 'response' => $search], 200);
+    }
+
+    public function list_cellar_user(Request $request)
+    {
+        $idusers = $request->idusers;
+
+        $search = DB::table('cellar_user')
+            ->leftjoin('cellar', 'cellar.idcellar', '=', 'cellar_user.id_user')
+            ->where('id_user', $idusers)
+            ->select('cellar_user.idcellar', 'cellar.name_cellar')
             ->get();
 
         return response()->json(['status' => 'ok', 'response' => $search], 200);

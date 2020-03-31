@@ -53,6 +53,8 @@ Route::group([
     Route::post('/user/users/delete_contract', 'NewControllers\user\users\UsersController@delete_contract');
     Route::post('/user/users/search_user', 'NewControllers\user\users\UsersController@search_user');
 
+    Route::post('/user/users/search_cellar', 'NewControllers\user\users\UsersController@search_cellar');
+
     Route::post('/login/login', 'NewControllers\login\LoginController@login');
     Route::post('/login/load_rol', 'NewControllers\login\LoginController@load_rol');
 
@@ -137,6 +139,7 @@ Route::group([
     Route::post('/list/list_typework', 'NewControllers\lists\ListController@list_typework');
     Route::post('/list/list_statework', 'NewControllers\lists\ListController@list_statework');
     Route::post('/list/list_charge', 'NewControllers\lists\ListController@list_charge');
+    Route::post('/list/list_cellar', 'NewControllers\lists\ListController@list_cellar');
 
     Route::post('/contract/list_contract_params', 'NewControllers\lists\ListController@list_contract_params');
 
@@ -292,5 +295,4 @@ Route::group([
     Route::post('geolocation/medellin', 'NewControllers\Geolocation\GeolocationController@medellin');
     Route::post('geolocation/geocodegoogle', 'NewControllers\Geolocation\GeolocationController@geocodegoogle');
     Route::post('geolocation/geocode_dian', 'NewControllers\Geolocation\GeolocationController@geocode_dian');
-
 });

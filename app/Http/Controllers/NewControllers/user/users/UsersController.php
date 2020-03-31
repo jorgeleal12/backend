@@ -18,18 +18,17 @@ class UsersController extends Controller
     public function create(Request $request)
     {
 
-        $name      = $request->input('name');
-        $last_name = $request->input('last_name');
-        $email     = $request->input('email');
-        //$password          = Hash::make( $request->password );
-        $password          = $request->input('password');
-        $state             = $request->input('state');
-        $rol_idrol         = $request->input('rol_idrol');
-        $company_idcompany = $request->input('company_idcompany');
-        $id                = $request->input('id');
-        //cedula o identificacion del usuario
-        $contract = $request->input('selectedUser');
-        $type     = $request->input('type');
+        $name              = $request->name;
+        $last_name         = $request->last_name;
+        $email             = $request->email;
+        $password          = $request->password;
+        $state             = $request->state;
+        $rol_idrol         = $request->rol_idrol;
+        $company_idcompany = $request->company_idcompany;
+        $id                = $request->id;
+        $contract          = $request->selectedUser;
+        $type              = $request->type;
+        $cellar            = $request->cellar;
 
         $insert = DB::table('users')
             ->insertGetid([
@@ -45,6 +44,7 @@ class UsersController extends Controller
             ]);
 
         $this->contract_user($contract, $insert);
+        $this->cellar_user($cellar, $insert);
         return response()->json(['status' => 'ok', 'reponse' => true, 'result' => $insert], 200);
     }
 
@@ -56,6 +56,18 @@ class UsersController extends Controller
                 ->insert([
                     'users_idusers' => $insertid,
                     'idcontract'    => $contracts,
+                ]);
+        }
+    }
+
+    public function cellar_user($cellar, $insertid)
+    {
+        foreach ($cellar as $cellars) {
+
+            $insert = DB::table('cellar_user')
+                ->insert([
+                    'id_user'  => $insertid,
+                    'idcellar' => $cellars,
                 ]);
         }
     }
@@ -84,6 +96,7 @@ class UsersController extends Controller
         //cedula o identificacion del usuario
         $type     = $request->type;
         $contract = $request->selectedUser;
+        $cellar   = $request->cellar;
 
         $insert = DB::table('users')
             ->where('idusers', $idusers)
@@ -99,6 +112,7 @@ class UsersController extends Controller
             ]);
 
         $this->update_contrat($contract, $idusers);
+        $this->update_cellar($cellar, $idusers);
 
         return response()->json(['status' => 'ok', 'reponse' => true], 200);
     }
@@ -121,6 +135,24 @@ class UsersController extends Controller
 
     }
 
+    public function update_cellar($cellar, $idusers)
+    {
+
+        $delete = DB::table('cellar_user')
+            ->where('id_user', $idusers)
+            ->delete();
+
+        foreach ($cellar as $cellars) {
+
+            $insert = DB::table('cellar_user')
+                ->insert([
+                    'id_user'  => $idusers,
+                    'idcellar' => $cellars,
+                ]);
+        }
+
+    }
+
     public function search_contract(Request $request)
     {
 
@@ -130,6 +162,19 @@ class UsersController extends Controller
             ->leftjoin('contract', 'contract.idcontract', '=', 'contract_user.idcontract')
             ->where('users_idusers', $idusers)
             ->select('contract_user.idcontract', 'contract.contract_name')
+            ->get();
+
+        return response()->json(['status' => 'ok', 'response' => $search], 200);
+    }
+
+    public function search_cellar(Request $request)
+    {
+        $idusers = $request->input('idusers');
+
+        $search = DB::table('cellar_user')
+            ->leftjoin('cellar', 'cellar.idcellar', '=', 'cellar_user.id_user')
+            ->where('id_user', $idusers)
+            ->select('cellar_user.idcellar', 'cellar.name_cellar')
             ->get();
 
         return response()->json(['status' => 'ok', 'response' => $search], 200);
