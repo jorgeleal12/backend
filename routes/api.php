@@ -295,4 +295,7 @@ Route::group([
     Route::post('geolocation/medellin', 'NewControllers\Geolocation\GeolocationController@medellin');
     Route::post('geolocation/geocodegoogle', 'NewControllers\Geolocation\GeolocationController@geocodegoogle');
     Route::post('geolocation/geocode_dian', 'NewControllers\Geolocation\GeolocationController@geocode_dian');
+
+    Route::post('purchase/list_cellar', 'NewControllers\Inventary\Purchase\PurchaseController@list_cellar');
+    Route::get('/autocomplete/autocomplete_provider', 'NewControllers\autocomplete\AutocompleteController@autocomplete_provider');
 });
