@@ -298,4 +298,6 @@ Route::group([
 
     Route::post('purchase/list_cellar', 'NewControllers\Inventary\Purchase\PurchaseController@list_cellar');
     Route::get('/autocomplete/autocomplete_provider', 'NewControllers\autocomplete\AutocompleteController@autocomplete_provider');
+
+    Route::get('/autocomplete/autocomplete_code_material', 'NewControllers\autocomplete\AutocompleteController@autocomplete_code_material');
 });
