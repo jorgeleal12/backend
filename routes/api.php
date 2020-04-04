@@ -298,5 +298,14 @@ Route::group([
     Route::post('provider/create', 'NewControllers\provider\ProviderController@create');
     Route::post('provider/update', 'NewControllers\provider\ProviderController@update');
     Route::post('provider/delete', 'NewControllers\provider\ProviderController@delete');
+
+
+    Route::get('/autocomplete/autocomplete_provider', 'NewControllers\autocomplete\AutocompleteController@autocomplete_provider');
+
+    Route::post('purchase/list_cellar', 'NewControllers\Inventary\Purchase\PurchaseController@list_cellar');
+    Route::get('/autocomplete/autocomplete_code_material', 'NewControllers\autocomplete\AutocompleteController@autocomplete_code_material');	    
+    Route::get('/autocomplete/autocomplete_code_material', 'NewControllers\autocomplete\AutocompleteController@autocomplete_code_material');
+    Route::get('/autocomplete/autocomplete_descr_material', 'NewControllers\autocomplete\AutocompleteController@autocomplete_descr_material');
+
     
 });
