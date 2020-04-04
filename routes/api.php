@@ -288,4 +288,12 @@ Route::group([
     Route::get('material/list_typeMaterial', 'NewControllers\material\MaterialController@list_typeMaterial');
     Route::get('material/search', 'NewControllers\material\MaterialController@search');
     Route::get('material/search_code', 'NewControllers\material\MaterialController@search_code');
+
+    ///---------------------------Providers-------------------------------------------
+    Route::get('provider/listProviders', 'NewControllers\provider\ProviderController@getLis');
+    Route::get('provider/search_provider', 'NewControllers\provider\ProviderController@search_provider');
+    Route::post('provider/create', 'NewControllers\provider\ProviderController@create');
+    Route::post('provider/update', 'NewControllers\provider\ProviderController@update');
+    Route::post('provider/delete', 'NewControllers\provider\ProviderController@delete');
+    
 });
