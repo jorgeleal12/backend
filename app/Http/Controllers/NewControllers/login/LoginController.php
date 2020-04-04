@@ -54,4 +54,5 @@ class LoginController extends Controller
 
         return response()->json(['status' => 'ok', 'reponse' => $search], 200);
     }
+
 }
