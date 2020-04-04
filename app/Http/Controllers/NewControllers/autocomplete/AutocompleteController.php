@@ -102,4 +102,17 @@ class AutocompleteController extends Controller
 
         return response()->json(['status' => 'ok', 'response' => $search], 200);
     }
+
+    public function autocomplete_descr_material(Request $request)
+    {
+        $name = $request->input('name');
+
+        $search = DB::table('material')
+            ->where('name_materials', 'like', $name . '%')
+            ->select('material.*', 'material.name_materials as name', 'idmaterials as id')
+            ->take(10)
+            ->get();
+
+        return response()->json(['status' => 'ok', 'response' => $search], 200);
+    }
 }

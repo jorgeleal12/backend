@@ -300,4 +300,5 @@ Route::group([
     Route::get('/autocomplete/autocomplete_provider', 'NewControllers\autocomplete\AutocompleteController@autocomplete_provider');
 
     Route::get('/autocomplete/autocomplete_code_material', 'NewControllers\autocomplete\AutocompleteController@autocomplete_code_material');
+    Route::get('/autocomplete/autocomplete_descr_material', 'NewControllers\autocomplete\AutocompleteController@autocomplete_descr_material');
 });
