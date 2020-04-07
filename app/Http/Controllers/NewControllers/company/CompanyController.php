@@ -51,4 +51,16 @@ class CompanyController extends Controller
         return response()->json(['status' => 'ok', 'response' => true], 200);
     }
 
+    public function companyfind(Request $request)
+    {
+
+        $idcompany = $request->company;
+
+        $search = DB::table('company')
+            ->where('idcompany', $idcompany)
+            ->first();
+
+        return response()->json(['status' => 'ok', 'response' => $search], 200);
+    }
+
 }

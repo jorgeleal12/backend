@@ -38,6 +38,8 @@ Route::group([
     Route::post('/company/update', 'NewControllers\company\CompanyController@update');
     Route::post('/company/list_company', 'NewControllers\company\CompanyController@list_company');
 
+    Route::get('/company/companyfind', 'NewControllers\company\CompanyController@companyfind');
+
     Route::post('/contract/create', 'NewControllers\contract\ContractController@create');
     Route::post('/contract/searchs', 'NewControllers\contract\ContractController@searchs');
     Route::post('/contracts/list_contract', 'NewControllers\contract\ContractController@list_contract');
@@ -299,13 +301,11 @@ Route::group([
     Route::post('provider/update', 'NewControllers\provider\ProviderController@update');
     Route::post('provider/delete', 'NewControllers\provider\ProviderController@delete');
 
-
     Route::get('/autocomplete/autocomplete_provider', 'NewControllers\autocomplete\AutocompleteController@autocomplete_provider');
 
     Route::post('purchase/list_cellar', 'NewControllers\Inventary\Purchase\PurchaseController@list_cellar');
-    Route::get('/autocomplete/autocomplete_code_material', 'NewControllers\autocomplete\AutocompleteController@autocomplete_code_material');	    
+    Route::get('/autocomplete/autocomplete_code_material', 'NewControllers\autocomplete\AutocompleteController@autocomplete_code_material');
     Route::get('/autocomplete/autocomplete_code_material', 'NewControllers\autocomplete\AutocompleteController@autocomplete_code_material');
     Route::get('/autocomplete/autocomplete_descr_material', 'NewControllers\autocomplete\AutocompleteController@autocomplete_descr_material');
 
-    
 });
