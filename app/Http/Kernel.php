@@ -20,6 +20,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\TrustProxies::class,
         \App\Http\Middleware\Cors::class, // Place Cors middleware here
+        // \Fruitcake\Cors\HandleCors::class,
 
     ];
 
@@ -61,6 +62,6 @@ class Kernel extends HttpKernel
         'guest'         => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'signed'        => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle'      => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'jwt'           => \App\Http\Middleware\JWT::class,
+        'jwt' => \App\Http\Middleware\RefreshToken::class
     ];
 }

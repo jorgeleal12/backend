@@ -9,10 +9,7 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
- */
-
-Route::group([
-    // 'prefix' => 'auth',
+ */Route::group(['jwt', ['except']
 ], function () {
     Route::post('login', 'AuthController@login');
     Route::post('logout', 'AuthController@logout');
@@ -21,6 +18,14 @@ Route::group([
     Route::post('create', 'Auth\PasswordResetController@create');
     Route::get('find/{token}', 'Auth\PasswordResetController@find');
     Route::post('me', 'AuthController@me');
+    Route::post('/company/searchs', 'NewControllers\company\CompanyController@searchs');
+    Route::post('/contract/onchangesearchs', 'NewControllers\contract\ContractController@onchangesearchs');
+});
+
+Route::group(
+    ['middleware' => ['jwt']
+], function () {
+  
     Route::post('prueba', 'AuthController@prueba');
     Route::post('/user/permission/create', 'NewControllers\user\management\PermissionController@create');
     Route::post('/user/permission/search', 'NewControllers\user\management\PermissionController@search');
@@ -34,7 +39,7 @@ Route::group([
     Route::post('/user/rol/update_permission_rol', 'NewControllers\user\management\PermissionController@update_permission_rol');
 
     Route::post('/company/create', 'NewControllers\company\CompanyController@create');
-    Route::post('/company/searchs', 'NewControllers\company\CompanyController@searchs');
+   
     Route::post('/company/update', 'NewControllers\company\CompanyController@update');
     Route::post('/company/list_company', 'NewControllers\company\CompanyController@list_company');
 
@@ -43,7 +48,7 @@ Route::group([
     Route::post('/contract/create', 'NewControllers\contract\ContractController@create');
     Route::post('/contract/searchs', 'NewControllers\contract\ContractController@searchs');
     Route::post('/contracts/list_contract', 'NewControllers\contract\ContractController@list_contract');
-    Route::post('/contract/onchangesearchs', 'NewControllers\contract\ContractController@onchangesearchs');
+   
     Route::post('/contract/update', 'NewControllers\contract\ContractController@update');
     Route::post('/list/contract', 'NewControllers\contract\ContractController@search_contracts');
 
