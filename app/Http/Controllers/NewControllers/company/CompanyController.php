@@ -10,15 +10,17 @@ class CompanyController extends Controller
 {
     public function create(Request $request)
     {
-        $company_name    = $request->input("company_name");
-        $company_address = $request->input("company_address");
-        $company_nit     = $request->input("company_nit");
+        $company_name    = $request->company_name;
+        $company_address = $request->company_address;
+        $company_nit     = $request->company_nit;
+        $phone           = $request->phone;
 
         $insert = DB::table('company')
             ->insert([
                 'company_name'    => $company_name,
                 'company_address' => $company_address,
                 'company_nit'     => $company_nit,
+                'phone'           => $phone,
             ]);
 
         return response()->json(['status' => 'ok', 'response' => true], 200);
@@ -35,10 +37,11 @@ class CompanyController extends Controller
 
     public function update(Request $request)
     {
-        $company_name    = $request->input("company_name");
-        $company_address = $request->input("company_address");
-        $company_nit     = $request->input("company_nit");
-        $idcompany       = $request->input("idcompany");
+        $idcompany       = $request->idcompany;
+        $company_name    = $request->company_name;
+        $company_address = $request->company_address;
+        $company_nit     = $request->company_nit;
+        $phone           = $request->phone;
 
         $update = DB::table('company')
             ->where('idcompany', $idcompany)
@@ -46,7 +49,7 @@ class CompanyController extends Controller
                 'company_name'    => $company_name,
                 'company_address' => $company_address,
                 'company_nit'     => $company_nit,
-
+                'phone'           => $phone,
             ]);
         return response()->json(['status' => 'ok', 'response' => true], 200);
     }
