@@ -161,14 +161,14 @@ class EmployeeController extends Controller
     {
         $idarl    = $request->input('idarl');
         $name_arl = $request->input('name_arl');
-        $type     = $request->input('type');
 
-        if ($type == 1) {
+        if (!$idarl) {
             $insert = DB::table('arl')
                 ->insert([
                     'name_arl' => $name_arl,
                 ]);
             return response()->json(['status' => 'ok', 'response' => true], 200);
+
         } else {
             $update = DB::table('arl')
                 ->where('idarl', $idarl)
@@ -176,6 +176,7 @@ class EmployeeController extends Controller
                     'name_arl' => $name_arl,
                 ]);
             return response()->json(['status' => 'ok', 'response' => false], 200);
+
         }
 
     }
@@ -212,14 +213,14 @@ class EmployeeController extends Controller
     {
         $ideps    = $request->input('ideps');
         $name_eps = $request->input('name_eps');
-        $type     = $request->input('type');
 
-        if ($type == 1) {
+        if (!$ideps) {
             $insert = DB::table('eps')
                 ->insert([
                     'name_eps' => $name_eps,
                 ]);
             return response()->json(['status' => 'ok', 'response' => true], 200);
+
         } else {
             $update = DB::table('eps')
                 ->where('ideps', $ideps)
@@ -256,7 +257,7 @@ class EmployeeController extends Controller
         $name_pension = $request->name_pension;
         $type         = $request->type;
 
-        if ($type == 1) {
+        if (!$idpension) {
             $insert = DB::table('pension')
                 ->insert([
                     'name_pension' => $name_pension,
