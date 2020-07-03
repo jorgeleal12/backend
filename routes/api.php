@@ -22,6 +22,8 @@
     Route::get('refresh', 'AuthController@refresh');
     Route::post('/company/searchs', 'NewControllers\company\CompanyController@searchs');
     Route::post('/contract/onchangesearchs', 'NewControllers\contract\ContractController@onchangesearchs');
+    // Route::get('prueba', 'soap\SoapController@prueba');
+    Route::get('prueba', 'NewControllers\Soap\SoapController@prueba');
 });
 
 Route::group(
