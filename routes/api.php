@@ -310,6 +310,9 @@ Route::group(
         Route::post('provider/update', 'NewControllers\provider\ProviderController@update');
         Route::post('provider/delete', 'NewControllers\provider\ProviderController@delete');
 
+        Route::post('geolocation/medellin', 'NewControllers\Geolocation\GeolocationController@medellin');
+        Route::post('geolocation/geocodegoogle', 'NewControllers\Geolocation\GeolocationController@geocodegoogle');
+
         Route::get('/autocomplete/autocomplete_provider', 'NewControllers\autocomplete\AutocompleteController@autocomplete_provider');
 
         Route::post('purchase/list_cellar', 'NewControllers\Inventary\Purchase\PurchaseController@list_cellar');
