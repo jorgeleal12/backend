@@ -37,6 +37,13 @@ class EmployeeController extends Controller
         $state             = $request->state;
         $charges_idcharges = $request->charges_idcharges;
 
+        $age             = $request->age;
+        $caja_idbox      = $request->caja_idbox;
+        $type_rh         = $request->type_rh;
+        $education_level = $request->education_level;
+        $location_az     = $request->location_az;
+        $expedition_date = $request->expedition_date;
+
         $search = DB::table('employees')
             ->where('identification', $identification)
             ->first();
@@ -70,6 +77,13 @@ class EmployeeController extends Controller
                 'state'                   => $state,
                 'charges_idcharges'       => $charges_idcharges,
 
+                'age'                     => $age,
+                'caja_idbox'              => $caja_idbox,
+                'type_rh'                 => $type_rh,
+                'education_level'         => $education_level,
+                'location_az'             => $location_az,
+                'expedition_date'         => $expedition_date,
+
             ]);
 
         return response()->json(['status' => 'ok', 'response' => true], 200);
@@ -97,6 +111,13 @@ class EmployeeController extends Controller
         $city                    = $request->input('city');
         $department_iddepartment = $request->input('department_iddepartment');
         $phone_contact           = $request->input('phone_contact');
+
+        $age             = $request->age;
+        $caja_idbox      = $request->caja_idbox;
+        $type_rh         = $request->type_rh;
+        $education_level = $request->education_level;
+        $location_az     = $request->location_az;
+        $expedition_date = $request->expedition_date;
 
         $state             = $request->state;
         $charges_idcharges = $request->charges_idcharges;
@@ -126,6 +147,12 @@ class EmployeeController extends Controller
                 'date_admission'          => $date_admission,
                 'state'                   => $state,
                 'charges_idcharges'       => $charges_idcharges,
+                'age'                     => $age,
+                'caja_idbox'              => $caja_idbox,
+                'type_rh'                 => $type_rh,
+                'education_level'         => $education_level,
+                'location_az'             => $location_az,
+                'expedition_date'         => $expedition_date,
 
             ]);
 
