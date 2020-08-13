@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use Carbon\Carbon;
 class EmployeeController extends Controller
 {
     //
+
 
     public function create(Request $request)
     {
@@ -117,7 +119,8 @@ class EmployeeController extends Controller
         $type_rh         = $request->type_rh;
         $education_level = $request->education_level;
         $location_az     = $request->location_az;
-        $expedition_date = $request->expedition_date;
+        $expedition_date =date('Y-m-d', strtotime($request->input('expedition_date'))) == '1969-12-31' ? null : date('Y-m-d', strtotime($request->input('expedition_date')));
+
 
         $state             = $request->state;
         $charges_idcharges = $request->charges_idcharges;
@@ -166,7 +169,10 @@ class EmployeeController extends Controller
         $search = DB::table('employees')
             ->where('name', 'like', '%' . $employee . '%')
             ->orWhere('identification', 'like', '%' . $employee . '%')
-            ->select('employees.*', DB::raw('CONCAT(employees.name," ",employees.last_name) AS full_name'))
+            ->select('employees.*', DB::raw('CONCAT(employees.name," ",employees.last_name) AS full_name')
+            ,DB::raw('DATE_FORMAT(employees.birthdate, "%Y/%m/%d") as birthdate')
+                     ,DB::raw('DATE_FORMAT(employees.expedition_date, "%Y/%m/%d") as expedition_date')
+                     ,DB::raw('DATE_FORMAT(employees.date_admission, "%Y/%m/%d") as date_admission'))
             ->take(10)
             ->get();
 
@@ -175,8 +181,15 @@ class EmployeeController extends Controller
 
     public function search_employee()
     {
+
+
+
         $search = DB::table('employees')
             ->orderBy('name', 'ASC')
+            ->select('employees.*',DB::raw('DATE_FORMAT(employees.birthdate, "%Y/%m/%d") as birthdate')
+
+                     ,DB::raw('DATE_FORMAT(employees.expedition_date, "%Y/%m/%d") as expedition_date')
+                     ,DB::raw('DATE_FORMAT(employees.date_admission, "%Y/%m/%d") as date_admission') )
             ->get();
 
         return response()->json(['status' => 'ok', 'response' => $search], 200);
