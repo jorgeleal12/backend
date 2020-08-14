@@ -42,6 +42,7 @@ class EmployeeController extends Controller
         $type_rh         = $request->type_rh;
         $education_level = $request->education_level;
         $location_az     = $request->location_az;
+
         $expedition_date =date('Y-m-d', strtotime($request->input('expedition_date'))) == '1969-12-31' ? null : date('Y-m-d', strtotime($request->input('expedition_date')));
 
 
