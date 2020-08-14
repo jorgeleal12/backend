@@ -88,7 +88,7 @@ class EmployeeController extends Controller
 
             ]);
 
-        return response()->json(['status' => 'ok', 'response' => true], 200);
+        return response()->json(['status' => 'ok', 'response' => $insert], 200);
     }
 
     public function update(Request $request)
