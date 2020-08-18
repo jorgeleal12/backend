@@ -43,8 +43,7 @@ class EmployeeController extends Controller
         $education_level = $request->education_level;
         $location_az     = $request->location_az;
 
-        $expedition_date =date('Y-m-d', strtotime($request->input('expedition_date'))) == '1969-12-31' ? null : date('Y-m-d', strtotime($request->input('expedition_date')));
-
+        $expedition_date = date('Y-m-d', strtotime($request->input('expedition_date'))) == '1969-12-31' ? null : date('Y-m-d', strtotime($request->input('expedition_date')));
 
         $search = DB::table('employees')
             ->where('identification', $identification)
@@ -88,7 +87,7 @@ class EmployeeController extends Controller
 
             ]);
 
-        return response()->json(['status' => 'ok', 'response' => $insert], 200);
+        return response()->json(['status' => 'ok', 'response' => true, 'idemployees' => $insert], 200);
     }
 
     public function update(Request $request)
@@ -182,7 +181,7 @@ class EmployeeController extends Controller
     {
 
         $search = DB::table('employees')
-            ->orderBy('name', 'ASC')
+            ->orderBy('idemployees', 'DESC')
             ->select('employees.*', DB::raw('DATE_FORMAT(employees.birthdate, "%Y/%m/%d") as birthdate')
 
                 , DB::raw('DATE_FORMAT(employees.expedition_date, "%Y/%m/%d") as expedition_date')
