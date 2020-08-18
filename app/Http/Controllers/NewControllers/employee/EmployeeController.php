@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\NewControllers\employee;
 
 use App\Http\Controllers\Controller;
+use File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
