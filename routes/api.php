@@ -24,7 +24,7 @@
     Route::post('/contract/onchangesearchs', 'NewControllers\contract\ContractController@onchangesearchs');
     // Route::get('prueba', 'soap\SoapController@prueba');
     Route::get('prueba', 'NewControllers\Soap\SoapController@prueba');
-    Route::post('/employee/upload_image', 'NewControllers\UploadImage\UploadController@upload_image');
+    Route::post('/employee/upload_image', 'NewControllers\employee\EmployeeController@upload_image');
 
 });
 
