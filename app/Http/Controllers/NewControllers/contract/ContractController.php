@@ -77,4 +77,45 @@ class ContractController extends Controller
             ->get();
         return response()->json(['status' => 'ok', 'response' => $search], 200);
     }
+
+    public function create_projec(Request $request)
+    {
+
+        $idcompany     = $request->idcompany;
+        $name_Projects = $request->name_Projects;
+
+        $insert = DB::table('projects')
+            ->insert([
+                'name_Projects' => $name_Projects,
+                'idcompany'     => $idcompany,
+            ]);
+
+        return response()->json(['status' => 'ok', 'response' => true], 200);
+    }
+
+    public function list_projec(Request $request)
+    {
+
+        $company = $request->input('company');
+
+        $search = DB::table('projects')
+            ->where('idcompany', $company)
+            ->get();
+
+        return response()->json(['status' => 'ok', 'response' => $search], 200);
+    }
+
+    public function update_projec(Request $request)
+    {
+        $name_Projects = $request->input('name_Projects');
+        $idprojects    = $request->input('idprojects');
+
+        $update = DB::table('projects')
+            ->where('idprojects', $idprojects)
+            ->update([
+                'name_Projects' => $name_Projects,
+            ]);
+        return response()->json(['status' => 'ok', 'response' => true], 200);
+    }
+
 }

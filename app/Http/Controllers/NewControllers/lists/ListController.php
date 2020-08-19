@@ -138,6 +138,18 @@ class ListController extends Controller
         return response()->json(['status' => 'ok', 'response' => $search], 200);
     }
 
+    public function list_project_params(Request $request)
+    {
+
+        $idcompany = $request->idcompany;
+
+        $search = DB::table('projects')
+            ->where('idcompany', $idcompany)
+            ->get();
+
+        return response()->json(['status' => 'ok', 'response' => $search], 200);
+    }
+
     public function list_cellar()
     {
         $search = DB::table('cellar')

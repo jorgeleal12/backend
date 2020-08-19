@@ -55,6 +55,10 @@ Route::group(
         Route::post('/contract/searchs', 'NewControllers\contract\ContractController@searchs');
         Route::post('/contracts/list_contract', 'NewControllers\contract\ContractController@list_contract');
 
+        Route::post('/contracts/list_projec', 'NewControllers\contract\ContractController@list_projec');
+        Route::post('/contract/create_projec', 'NewControllers\contract\ContractController@create_projec');
+        Route::post('/contract/update_projec', 'NewControllers\contract\ContractController@update_projec');
+
         Route::post('/contract/update', 'NewControllers\contract\ContractController@update');
         Route::post('/list/contract', 'NewControllers\contract\ContractController@search_contracts');
 
@@ -154,6 +158,7 @@ Route::group(
         Route::post('/list/list_cellar', 'NewControllers\lists\ListController@list_cellar');
 
         Route::post('/contract/list_contract_params', 'NewControllers\lists\ListController@list_contract_params');
+        Route::post('/list/list_project', 'NewControllers\lists\ListController@list_project_params');
 
         Route::post('/odi/create', 'NewControllers\odi\OdiController@create');
         Route::post('/odi/update', 'NewControllers\odi\OdiController@update');
