@@ -182,7 +182,7 @@ class EmployeeController extends Controller
     {
 
         $search = DB::table('employees')
-            ->orderBy('idemployees', 'DESC')
+            ->orderBy('idemployees', 'ASC')
             ->select('employees.*', DB::raw('DATE_FORMAT(employees.birthdate, "%Y/%m/%d") as birthdate')
 
                 , DB::raw('DATE_FORMAT(employees.expedition_date, "%Y/%m/%d") as expedition_date')
