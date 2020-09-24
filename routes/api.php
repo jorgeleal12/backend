@@ -25,6 +25,8 @@
     // Route::get('prueba', 'soap\SoapController@prueba');
     Route::get('prueba', 'NewControllers\Soap\SoapController@prueba');
     Route::post('/employee/upload_image', 'NewControllers\employee\EmployeeController@upload_image');
+    Route::post('/inspection/upload_image_certificate', 'NewControllers\UploadImage\UploadController@upload_image_certificate');
+    Route::post('/inspection/upload_pdf_certificate', 'NewControllers\UploadImage\UploadController@upload_pdf_certificate');
 
 });
 
@@ -121,6 +123,7 @@ Route::group(
         Route::get('/inspection/search_address', 'NewControllers\Inspection\InspectionController@search_address');
         Route::get('/inspection/search_client', 'NewControllers\Inspection\InspectionController@search_client');
         Route::get('/inspection/search_conse', 'NewControllers\Inspection\InspectionController@search_conse');
+        Route::get('/inspection/search_report', 'NewControllers\Inspection\InspectionController@search_report');
 
         Route::post('/inspection/certificate/create', 'NewControllers\Inspection\InspectionController@create_certificate');
         Route::post('/inspection/Update_certificate/update', 'NewControllers\Inspection\InspectionController@Update_certificate');
@@ -129,12 +132,13 @@ Route::group(
         Route::post('/inspection/programming/search_programming', 'NewControllers\Inspection\InspectionController@search_programming');
         Route::get('/inspection/programming/search_programming_data', 'NewControllers\Inspection\InspectionController@search_programming_data');
         Route::post('/inspection/programming/update', 'NewControllers\Inspection\InspectionController@update_programming');
+        Route::post('/inspection/search_programing', 'NewControllers\Inspection\InspectionController@search_programing');
 
-        Route::post('/inspection/upload_image_certificate', 'NewControllers\UploadImage\UploadController@upload_image_certificate');
-        Route::post('/inspection/upload_pdf_certificate', 'NewControllers\UploadImage\UploadController@upload_pdf_certificate');
         Route::get('/inspection/certificate/search_images', 'NewControllers\Inspection\InspectionController@search_images');
         Route::get('/inspection/certificate/search_pdf', 'NewControllers\Inspection\InspectionController@search_pdf');
         Route::post('/inspection/delete_images', 'NewControllers\Inspection\InspectionController@delete_images');
+        Route::post('/inspection/search_routes', 'NewControllers\Inspection\InspectionController@search_routes');
+        Route::post('/inspection/import', 'NewControllers\Inspection\InspectionController@import');
         /////////////////////////////////////////-------------------------------------///////////////////////////
 
         Route::get('/list/list_company', 'NewControllers\lists\ListController@list_company');
@@ -287,6 +291,7 @@ Route::group(
         Route::post('/activities/delete_activities', 'NewControllers\operation\ActitiviControllers\ActivitiController@delete_activities');
 
         Route::post('/report/obra', 'NewControllers\report\ReportController@ReportObra');
+        Route::post('/report/search_inspetion', 'NewControllers\report\ReportController@search_inspetion');
         Route::get('/autocomplete/autocomplete_activities', 'NewControllers\autocomplete\AutocompleteController@autocomplete_activities');
 
         Route::get('/autocomplete/autocomplete_certicate', 'NewControllers\autocomplete\AutocompleteController@autocomplete_certicate');

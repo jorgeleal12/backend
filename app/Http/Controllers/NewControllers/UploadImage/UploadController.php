@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class UploadController extends Controller
 {
@@ -87,9 +88,14 @@ class UploadController extends Controller
             File::makeDirectory($path, 0777, true);
 
         }
-        $url = 'inspection/' . $idcontract . '/' . $id_inspection . '/' . $idcertificate . '/';
+        $url = 'https://gama-ingenieria.s3.amazonaws.com/CERTIFICADOS/';
 
         move_uploaded_file($file, $carpeta . $namefile);
+        // $image["file"]['tmp_name'] = $namefile;
+
+        $path = Storage::disk('s3')->put('CERTIFICADOS/' . $namefile, fopen($carpeta . $namefile, 'r+'), 'public');
+
+        File::delete($carpeta . $namefile);
 
         $insert = DB::table('image_certificate')
             ->insert([
@@ -137,9 +143,15 @@ class UploadController extends Controller
             File::makeDirectory($path, 0777, true);
 
         }
-        $url = 'inspection/' . $idcontract . '/' . $id_inspection . '/' . $idcertificate . '/';
+        $url = 'https://gama-ingenieria.s3.amazonaws.com/CERTIFICADOS/';
 
         move_uploaded_file($file, $carpeta . $namefile);
+
+        $path = Storage::disk('s3')->put('CERTIFICADOS/' . $namefile, fopen($carpeta . $namefile, 'r+'), 'public');
+
+        // $path = Storage::disk('s3')->delete()
+
+        File::delete($carpeta . $namefile);
 
         $insert = DB::table('image_certificate')
             ->insert([
@@ -151,4 +163,5 @@ class UploadController extends Controller
 
         return response()->json(['status' => 'ok', 'response' => true], 200);
     }
+
 }
