@@ -314,6 +314,12 @@ Route::group(
         Route::get('material/search', 'NewControllers\material\MaterialController@search');
         Route::get('material/search_code', 'NewControllers\material\MaterialController@search_code');
 
+        Route::post('material/create_barcode', 'NewControllers\material\MaterialController@create_barcode');
+        Route::post('material/update_barcode', 'NewControllers\material\MaterialController@update_barcode');
+        Route::post('material/search_barcode', 'NewControllers\material\MaterialController@search_barcode');
+        Route::post('material/delete_barcode', 'NewControllers\material\MaterialController@delete_barcode');
+        Route::post('output/search_barcode', 'NewControllers\material\MaterialController@searchbarcode');
+
         ///---------------------------Providers-------------------------------------------
         Route::get('provider/listProviders', 'NewControllers\provider\ProviderController@getLis');
         Route::get('provider/search_provider', 'NewControllers\provider\ProviderController@search_provider');
