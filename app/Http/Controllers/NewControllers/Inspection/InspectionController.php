@@ -212,6 +212,36 @@ class InspectionController extends Controller
         return response()->json(['status' => 'ok', 'response' => $search], 200);
     }
 
+    public function search_cert(Request $request)
+    {
+        $cert = $request->cert;
+
+        $search = DB::table('inspecion')
+            ->leftjoin('client_account', 'client_account.idclient_account', 'inspecion.idclient_account')
+            ->leftjoin('client', 'client.idclient', 'client_account.client_idclient')
+            ->leftjoin('municipality', 'municipality.idmunicipality', '=', 'client_account.city')
+            ->leftjoin('certificate', 'certificate.inspecion_csc', '=', 'inspecion.csc')
+            ->where('certificate.certified_number', 'like', '%' . $cert . '%')
+        // ->leftjoin( 'employees', 'employees.idemployees', '=', 'client_account.scheduled_to' )
+
+            ->select('certificate.*', 'inspecion.*', 'inspecion.state as i_state', 'client_account.*', 'client.*', 'municipality.name_municipality', 'municipality.id_dane',
+                DB::raw('(CASE WHEN inspecion.gas_type = "1" THEN "Natural"
+                  ELSE "Gpl" END) AS gastype'),
+                DB::raw('(CASE WHEN inspecion.use = "1" THEN "Residencial"
+                       WHEN inspecion.use = "2" THEN "Comercial"
+                      ELSE "Industrial" END) AS name_use'),
+
+                DB::raw('(CASE WHEN inspecion.type = "1" THEN "Previa"
+                      WHEN inspecion.use = "2" THEN "Periodica"
+                      WHEN inspecion.use = "3" THEN "Reformaca"
+                     ELSE "Solicitud del Usuario" END) AS name_type'),
+                DB::raw("(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=inspecion.scheduled_to) AS name_scheduled_to"),
+                DB::raw("(select MAX(certified_number)  from certificate  where inspecion_csc=inspecion.csc) as certificate"))
+            ->paginate(5);
+
+        return response()->json(['status' => 'ok', 'response' => $search], 200);
+    }
+
     public function search_address(Request $request)
     {
         $address = $request->address;
@@ -249,7 +279,7 @@ class InspectionController extends Controller
             ->leftjoin('client_account', 'client_account.idclient_account', 'inspecion.idclient_account')
             ->leftjoin('client', 'client.idclient', 'client_account.client_idclient')
             ->leftjoin('municipality', 'municipality.idmunicipality', '=', 'client_account.city')
-            ->where('client.name_client', 'like', $client . '%')
+            ->where('client.name_client', 'like', '%' . $client . '%')
         // ->leftjoin( 'employees', 'employees.idemployees', '=', 'client_account.scheduled_to' )
 
             ->select('inspecion.*', 'inspecion.state as i_state', 'client_account.*', 'client.*', 'municipality.name_municipality', 'municipality.id_dane',
