@@ -172,6 +172,7 @@ class InspectionController extends Controller
                           WHEN inspecion.use = "2" THEN "Periodica"
                           WHEN inspecion.use = "3" THEN "Reformaca"
                          ELSE "Solicitud del Usuario" END) AS name_type'),
+
                 DB::raw("(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=inspecion.scheduled_to) AS name_scheduled_to"),
 
                 DB::raw("(select MAX(certified_number)  from certificate  where inspecion_csc=inspecion.csc) as certificate")
@@ -197,13 +198,13 @@ class InspectionController extends Controller
             ->select('inspecion.*', 'inspecion.state as i_state', 'client_account.*', 'client.*', 'municipality.name_municipality', 'municipality.id_dane',
                 DB::raw('(CASE WHEN inspecion.gas_type = "1" THEN "Natural"
                   ELSE "Gpl" END) AS gastype'),
-                DB::raw('(CASE WHEN inspecion.use = "1" THEN "Residencial"
-                       WHEN inspecion.use = "2" THEN "Comercial"
+                DB::raw('(CASE WHEN inspecion.use = 1 THEN "Residencial"
+                       WHEN inspecion.use = 2 THEN "Comercial"
                       ELSE "Industrial" END) AS name_use'),
 
-                DB::raw('(CASE WHEN inspecion.type = "1" THEN "Previa"
-                      WHEN inspecion.use = "2" THEN "Periodica"
-                      WHEN inspecion.use = "3" THEN "Reformaca"
+                DB::raw('(CASE WHEN inspecion.type = 1 THEN "Previa"
+                      WHEN inspecion.use = 2 THEN "Periodica"
+                      WHEN inspecion.use = 3 THEN "Reformaca"
                      ELSE "Solicitud del Usuario" END) AS name_type'),
                 DB::raw("(SELECT CONCAT(name,' ',last_name) FROM employees where employees.idemployees=inspecion.scheduled_to) AS name_scheduled_to"),
                 DB::raw("(select MAX(certified_number)  from certificate  where inspecion_csc=inspecion.csc) as certificate"))
