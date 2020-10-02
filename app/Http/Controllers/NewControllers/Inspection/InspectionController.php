@@ -430,8 +430,8 @@ class InspectionController extends Controller
     public function search_programming(Request $request)
     {
 
-        echo $date = date('Y-m-d', strtotime($request->date)) == '1970-01-01' ? null : date('Y-m-d', strtotime($request->date));
-        $state     = $request->state;
+        $date  = date('Y-m-d', strtotime($request->date)) == '1970-01-01' ? null : date('Y-m-d', strtotime($request->date));
+        $state = $request->state;
 
         if ($date == null) {
             $search = DB::table('inspecion')
@@ -469,7 +469,7 @@ class InspectionController extends Controller
                 ->leftjoin('client', 'client.idclient', 'client_account.client_idclient')
                 ->leftjoin('municipality', 'municipality.idmunicipality', '=', 'client_account.city')
                 ->where('inspecion.state', $state)
-                ->where('inspecion.schedule_date', 'like', '%' . $date . '%')
+                ->where('inspecion.schedule_date', $date)
 
             // ->leftjoin( 'employees', 'employees.idemployees', '=', 'client_account.scheduled_to' )
 
