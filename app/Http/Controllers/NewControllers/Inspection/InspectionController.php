@@ -439,7 +439,7 @@ class InspectionController extends Controller
                 ->leftjoin('client', 'client.idclient', 'client_account.client_idclient')
                 ->leftjoin('municipality', 'municipality.idmunicipality', '=', 'client_account.city')
                 ->where('inspecion.state', $state)
-                ->whereNull('inspecion.schedule_date')
+            // ->whereNull('inspecion.schedule_date')
             // ->orWhereNull('inspecion.schedule_date')
             // ->leftjoin( 'employees', 'employees.idemployees', '=', 'client_account.scheduled_to' )
 
