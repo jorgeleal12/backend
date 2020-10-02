@@ -430,8 +430,8 @@ class InspectionController extends Controller
     public function search_programming(Request $request)
     {
 
-        $date  = date('Y-m-d', strtotime($request->date)) == '1970-01-01' ? null : date('Y-m-d', strtotime($request->date));
-        $state = $request->state;
+        echo $date = date('Y-m-d', strtotime($request->date)) == '1970-01-01' ? null : date('Y-m-d', strtotime($request->date));
+        $state     = $request->state;
 
         if ($date == null) {
             $search = DB::table('inspecion')
