@@ -1,4 +1,15 @@
 <?php return array (
+  'codedge/laravel-fpdf' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Codedge\\Fpdf\\FpdfServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Fpdf' => 'Codedge\\Fpdf\\Facades\\Fpdf',
+    ),
+  ),
   'fideloper/proxy' => 
   array (
     'providers' => 

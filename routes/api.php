@@ -27,6 +27,8 @@
     Route::post('/employee/upload_image', 'NewControllers\employee\EmployeeController@upload_image');
     Route::post('/inspection/upload_image_certificate', 'NewControllers\UploadImage\UploadController@upload_image_certificate');
     Route::post('/inspection/upload_pdf_certificate', 'NewControllers\UploadImage\UploadController@upload_pdf_certificate');
+    Route::get('/print/maintenance', 'NewControllers\Prints\PrintMaintenanceController@print');
+    Route::get('/download/maintenance', 'NewControllers\Prints\PrintMaintenanceController@download');
 
 });
 
