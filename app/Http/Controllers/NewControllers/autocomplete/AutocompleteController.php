@@ -95,8 +95,9 @@ class AutocompleteController extends Controller
         $name = $request->input('name');
 
         $search = DB::table('material')
+            ->leftjoin('Unit', 'Unit.idUnit', 'material.Unit_idUnit')
             ->where('code_materials', 'like', $name . '%')
-            ->select('material.*', 'material.code_materials as name', 'idmaterials as id')
+            ->select('material.*', 'material.code_materials as name', 'idmaterials as id', 'Unit.name_unit')
             ->take(10)
             ->get();
 
@@ -108,8 +109,9 @@ class AutocompleteController extends Controller
         $name = $request->input('name');
 
         $search = DB::table('material')
+            ->leftjoin('Unit', 'Unit.idUnit', 'material.Unit_idUnit')
             ->where('name_materials', 'like', $name . '%')
-            ->select('material.*', 'material.name_materials as name', 'idmaterials as id')
+            ->select('material.*', 'material.name_materials as name', 'idmaterials as id', 'Unit.name_unit')
             ->take(10)
             ->get();
 
