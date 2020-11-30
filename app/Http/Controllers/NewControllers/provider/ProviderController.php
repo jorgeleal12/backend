@@ -19,7 +19,7 @@ class ProviderController extends Controller
 
         $providerList = DB::table('providers')
             ->select('providers.*')
-            ->paginate(5);
+            ->paginate(10);
 
         return response()->json(['status' => 'ok', 'response' => $providerList], 200);
     }
@@ -99,7 +99,7 @@ class ProviderController extends Controller
         $select = DB::table('providers')
             ->where('name_provider', 'like', '%' . $name . '%')
             ->select('providers.*')
-            ->paginate('5');
+            ->paginate('10');
         return response()->json(['status' => 'ok', 'response' => $select], 200);
     }
 }

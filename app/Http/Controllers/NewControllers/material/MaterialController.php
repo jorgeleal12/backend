@@ -65,11 +65,14 @@ class MaterialController extends Controller
 
         $id_material = $request->id;
 
-        $delete = DB::table('material')
-            ->where('idmaterials', $id_material)
-            ->delete();
-
-        return response()->json(['status' => 'ok', 'response' => true], 200);
+        try {
+            $delete = DB::table('material')
+                ->where('idmaterials', $id_material)
+                ->delete();
+            return response()->json(['status' => 'ok', 'response' => true], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 'not', 'response' => false], 200);
+        }
     }
 
     public function search()
@@ -79,7 +82,7 @@ class MaterialController extends Controller
             ->join('Unit', 'material.Unit_idUnit', '=', 'Unit.idUnit')
             ->join('type_material', 'material.id_typeMaterial', '=', 'type_material.id')
             ->select('material.*', 'Unit.*', 'type_material.*')
-            ->paginate(5);
+            ->paginate(10);
 
         return response()->json(['status' => 'ok', 'response' => $search], 200);
     }
