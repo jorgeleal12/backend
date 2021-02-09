@@ -97,7 +97,7 @@ class ProviderController extends Controller
         $name = $request->name;
 
         $select = DB::table('providers')
-            ->where('name_provider', 'like', '%' . $name . '%')
+            ->where('name_provider', 'like', '%' . $name)
             ->select('providers.*')
             ->paginate('10');
         return response()->json(['status' => 'ok', 'response' => $select], 200);

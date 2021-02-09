@@ -163,11 +163,12 @@ class EmployeeController extends Controller
 
     public function autocomplete(Request $request)
     {
+
         $employee = $request->input('employee');
 
         $search = DB::table('employees')
-            ->where('name', 'like', '%' . $employee . '%')
-            ->orWhere('identification', 'like', '%' . $employee . '%')
+            ->where('name', 'like', $employee . '%')
+        // ->orWhere('identification', 'like', '%' . $employee . '%')
             ->select('employees.*', DB::raw('CONCAT(employees.name," ",employees.last_name) AS full_name')
                 , DB::raw('DATE_FORMAT(employees.birthdate, "%Y/%m/%d") as birthdate')
                 , DB::raw('DATE_FORMAT(employees.expedition_date, "%Y/%m/%d") as expedition_date')
