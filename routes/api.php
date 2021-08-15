@@ -32,10 +32,7 @@
 
 });
 
-Route::group(
-    ['middleware' => ['jwt'],
-    ], function () {
-
+Route::group(['jwt' => ['except']], function () {
         Route::post('prueba', 'AuthController@prueba');
         Route::post('/user/permission/create', 'NewControllers\user\management\PermissionController@create');
         Route::post('/user/permission/search', 'NewControllers\user\management\PermissionController@search');
@@ -339,5 +336,4 @@ Route::group(
         Route::get('/autocomplete/autocomplete_code_material', 'NewControllers\autocomplete\AutocompleteController@autocomplete_code_material');
         Route::get('/autocomplete/autocomplete_code_material', 'NewControllers\autocomplete\AutocompleteController@autocomplete_code_material');
         Route::get('/autocomplete/autocomplete_descr_material', 'NewControllers\autocomplete\AutocompleteController@autocomplete_descr_material');
-
     });
