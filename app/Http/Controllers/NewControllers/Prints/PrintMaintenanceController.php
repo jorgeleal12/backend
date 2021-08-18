@@ -56,6 +56,8 @@ class PrintMaintenanceController extends Fpdf
 
         $name_materials = str_replace('”','"',$search->name_materials);
         $service_provided = str_replace('”','"',$search->service_provided);
+        $name_materials = str_replace('“','"',$name_materials);
+        $service_provided = str_replace('“','"',$service_provided);
         $this->Ln(23);
         $this->SetFont('Arial', '', 7);
         $this->Cell(38, 6, '', 0, 0);
@@ -206,6 +208,9 @@ class PrintMaintenanceController extends Fpdf
         }
         $name_materials = str_replace('”','"',$search->name_materials);
         $service_provided = str_replace('”','"',$search->service_provided);
+
+        $name_materials = str_replace('“','"',$name_materials);
+        $service_provided = str_replace('“','"',$service_provided);
         $this->Ln(23);
         $this->SetFont('Arial', '', 7);
         $this->Cell(38, 6, '', 0, 0);
