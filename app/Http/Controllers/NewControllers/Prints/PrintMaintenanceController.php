@@ -57,11 +57,11 @@ class PrintMaintenanceController extends Fpdf
         $this->Ln(23);
         $this->SetFont('Arial', '', 7);
         $this->Cell(38, 6, '', 0, 0);
-        $this->Cell(23, 3.2, $search->name_materials, 0, 0);
+        $this->Cell(23, 3.2,  utf8_decode($search->name_materials), 0, 0);
         $this->Ln(5.5);
         $this->SetFont('Arial', '', 7);
         $this->Cell(4, 6, '', 0, 0);
-        $this->Cell(23, 3.2, $search->code, 0, 0);
+        $this->Cell(23, 3.2,  utf8_decode($search->code), 0, 0);
 
         $this->Ln(49.5);
         $this->SetFont('Arial', '', 7);
@@ -121,12 +121,12 @@ class PrintMaintenanceController extends Fpdf
             $this->SetFont('Arial', '', 8);
             $this->Cell(2, 6, '', 0, 0);
             $this->Cell(60, 3.2, $date_maintenance, 0, 0);
-            $this->Cell(23, 3.2, $state_maintenance1, 0, 0);
+            $this->Cell(23, 3.2, $state_maintenance2, 0, 0);
 
             $this->Ln($line);
             $this->SetFont('Arial', '', 8);
             $this->Cell(62, 6, '', 0, 0);
-            $this->Cell(17, 3.2, $state_maintenance2, 0, 0);
+            $this->Cell(17, 3.2, $state_maintenance1, 0, 0);
             $this->Cell(40, 3.2, $t->who, 0, 0);
             $this->Cell(45, 6, '', 0, 0);
             $this->Cell(23, 3.2, $t->support, 0, 0);
@@ -206,11 +206,11 @@ class PrintMaintenanceController extends Fpdf
         $this->Ln(23);
         $this->SetFont('Arial', '', 7);
         $this->Cell(38, 6, '', 0, 0);
-        $this->Cell(23, 3.2, $search->name_materials, 0, 0);
+        $this->Cell(23, 3.2, utf8_decode($search->name_materials), 0, 0);
         $this->Ln(5.5);
         $this->SetFont('Arial', '', 7);
         $this->Cell(4, 6, '', 0, 0);
-        $this->Cell(23, 3.2, $search->code, 0, 0);
+        $this->Cell(23, 3.2, utf8_decode($search->code), 0, 0);
 
         $this->Ln(49.5);
         $this->SetFont('Arial', '', 7);
@@ -270,12 +270,12 @@ class PrintMaintenanceController extends Fpdf
             $this->SetFont('Arial', '', 8);
             $this->Cell(2, 6, '', 0, 0);
             $this->Cell(60, 3.2, $date_maintenance, 0, 0);
-            $this->Cell(23, 3.2, $state_maintenance1, 0, 0);
+            $this->Cell(23, 3.2, $state_maintenance2, 0, 0);
 
             $this->Ln($line);
             $this->SetFont('Arial', '', 8);
             $this->Cell(62, 6, '', 0, 0);
-            $this->Cell(17, 3.2, $state_maintenance2, 0, 0);
+            $this->Cell(17, 3.2, $state_maintenance1, 0, 0);
             $this->Cell(40, 3.2, $t->who, 0, 0);
             $this->Cell(45, 6, '', 0, 0);
             $this->Cell(23, 3.2, $t->support, 0, 0);
