@@ -257,7 +257,7 @@ class PrintMaintenanceController extends Fpdf
 
             $date_maintenance   = date('Y-m-d', strtotime($t->date_maintenance));
             $state_maintenance1 = '';
-            $state_maintenance2 = 'X3';
+            $state_maintenance2 = '';
 
             if ($t->state_maintenance == 1) {
                 $state_maintenance1 = 'X';
@@ -283,7 +283,7 @@ class PrintMaintenanceController extends Fpdf
 
             $this->Cell(1, 6, '', 0, 0);
             $y = $this->GetY();
-            $this->MultiCell(100, 3, utf8_decode($t->observations_responsable), 0, 1);
+            $this->MultiCell(150, 3, utf8_decode($t->observations_responsable), 0, 1);
             $y2 = $this->GetY();
 
             $space = (isset($y2) ? $y2 - $y : 0) - 0;
