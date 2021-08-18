@@ -11,7 +11,7 @@ class ProviderController extends Controller
 
     public function __construct()
     {
-        $this->middleware('jwt', ['except' => ['login']]);
+        // $this->middleware('jwt', ['except' => ['login']]);
     }
 
     public function getLis()
