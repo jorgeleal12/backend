@@ -9,8 +9,7 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
- */Route::group(['jwt', ['except'],
-], function () {
+ */Route::group(function () {
     Route::post('login', 'AuthController@login');
     Route::get('setting', 'AuthController@setting');
     Route::post('logout', 'AuthController@logout');
