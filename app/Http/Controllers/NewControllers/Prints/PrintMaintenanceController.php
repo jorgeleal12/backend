@@ -194,10 +194,13 @@ class PrintMaintenanceController extends Fpdf
         $row = 7;
         foreach ($search_image as $search_image) {
 
-            $this->Image('https://ares-path.s3.amazonaws.com/Items/' . $search_image->name_image, $row, 44, 48, 40);
-            $this->Cell(4, 6, '', 0, 0);
-            $row = $row + 48;
-            $row++;
+            $document= explode('.',$search_image->name_image);
+            if($document[1]!='pdf'){
+                $this->Image('https://ares-path.s3.amazonaws.com/Items/' . $search_image->name_image, $row, 44, 48, 40);
+                $this->Cell(4, 6, '', 0, 0);
+                $row = $row + 48;
+                $row++;
+            }
         }
 
         $this->Ln(23);
