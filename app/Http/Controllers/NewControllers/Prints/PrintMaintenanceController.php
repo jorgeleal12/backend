@@ -216,12 +216,12 @@ class PrintMaintenanceController extends Fpdf
         $this->SetFont('Arial', '', 7);
         $this->Cell(22, 6, '', 0, 0);
         $this->Cell(70, 3.2, $acquisition_date, 0, 0);
-        $this->Cell(23, 3.2, $search->name_provider, 0, 0);
+        $this->Cell(23, 3.2, utf8_decode($search->name_provider), 0, 0);
 
         $this->Ln(8.7);
         $this->SetFont('Arial', '', 8);
         $this->Cell(20, 6, '', 0, 0);
-        $this->Cell(23, 3.2, $search->service_provided, 0, 0);
+        $this->Cell(23, 3.2, utf8_decode($search->service_provided), 0, 0);
 
         $this->Ln(9.2);
         $this->SetFont('Arial', '', 8);
