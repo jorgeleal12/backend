@@ -54,10 +54,12 @@ class PrintMaintenanceController extends Fpdf
             }
         }
 
+        $name_materials = str_replace('”','"',$search->name_materials);
+        $service_provided = str_replace('”','"',$search->service_provided);
         $this->Ln(23);
         $this->SetFont('Arial', '', 7);
         $this->Cell(38, 6, '', 0, 0);
-        $this->Cell(23, 3.2,  utf8_decode($search->name_materials), 0, 0); 
+        $this->Cell(23, 3.2,  utf8_decode($name_materials), 0, 0); 
         $this->Ln(5.5);
         $this->SetFont('Arial', '', 7);
         $this->Cell(4, 6, '', 0, 0);
@@ -72,7 +74,7 @@ class PrintMaintenanceController extends Fpdf
         $this->Ln(8.7);
         $this->SetFont('Arial', '', 8);
         $this->Cell(20, 6, '', 0, 0);
-        $this->Cell(23, 3.2,  utf8_decode($search->service_provided), 0, 0);
+        $this->Cell(23, 3.2,  utf8_decode($service_provided), 0, 0);
 
         $this->Ln(9.2);
         $this->SetFont('Arial', '', 8);
@@ -202,11 +204,12 @@ class PrintMaintenanceController extends Fpdf
                 $row++;
             }
         }
-
+        $name_materials = str_replace('”','"',$search->name_materials);
+        $service_provided = str_replace('”','"',$search->service_provided);
         $this->Ln(23);
         $this->SetFont('Arial', '', 7);
         $this->Cell(38, 6, '', 0, 0);
-        $this->Cell(23, 3.2, utf8_decode($search->name_materials), 0, 0);
+        $this->Cell(23, 3.2, utf8_decode($name_materials), 0, 0);
         $this->Ln(5.5);
         $this->SetFont('Arial', '', 7);
         $this->Cell(4, 6, '', 0, 0);
@@ -221,7 +224,7 @@ class PrintMaintenanceController extends Fpdf
         $this->Ln(8.7);
         $this->SetFont('Arial', '', 8);
         $this->Cell(20, 6, '', 0, 0);
-        $this->Cell(23, 3.2, utf8_decode($search->service_provided), 0, 0);
+        $this->Cell(23, 3.2, utf8_decode($service_provided), 0, 0);
 
         $this->Ln(9.2);
         $this->SetFont('Arial', '', 8);
