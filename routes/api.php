@@ -30,9 +30,7 @@
     Route::get('/print/maintenance', 'NewControllers\Prints\PrintMaintenanceController@print');
     Route::get('/download/maintenance', 'NewControllers\Prints\PrintMaintenanceController@download');
 
-});
 
-Route::group(['jwt' => ['except']], function () {
         Route::post('prueba', 'AuthController@prueba');
         Route::post('/user/permission/create', 'NewControllers\user\management\PermissionController@create');
         Route::post('/user/permission/search', 'NewControllers\user\management\PermissionController@search');
