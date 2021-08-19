@@ -105,7 +105,7 @@ class PrintMaintenanceController extends Fpdf
         $this->Cell(5, 6, '', 0, 0);
         $this->Cell(15, 3.2, $search->serie, 0, 0);
 
-        $line  = '3.2';
+        $line  = '3';
         $line2 = '8.4';
         $this->Ln($line2);
         foreach ($search_maintenance as $t) {
