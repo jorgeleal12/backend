@@ -115,30 +115,30 @@ class PrintMaintenanceController extends Fpdf
             $state_maintenance2 = '';
             $name_maintenance = '';
 
-            if ($t->maintenance_type === 1) {
+            if ($t->maintenance_type == 1) {
                 $state_maintenance1 = 'X';
                 $name_maintenance = 'Correctivo';
-            }if ($t->maintenance_type === 2) {
+            }if ($t->maintenance_type == 2) {
                 $state_maintenance2 = 'X';
                 $name_maintenance = 'Preventivo';
             }
-            if ($t->maintenance_type === 3) {
+            if ($t->maintenance_type == 3) {
                 $state_maintenance2 = 'X';
                 $name_maintenance = 'Certificación equipos';
             }
-            if ($t->maintenance_type === 4) {
+            if ($t->maintenance_type == 4) {
                 $state_maintenance2 = 'X';
                 $name_maintenance = 'Calibración y puesta a punto';
             }
-            if ($t->maintenance_type === 5) {
+            if ($t->maintenance_type == 5) {
                 $state_maintenance2 = 'X';
                 $name_maintenance = 'Ensayo dielectrico';
             }
-            if ($t->maintenance_type ===6) {
+            if ($t->maintenance_type == 6) {
                 $state_maintenance2 = 'X';
                 $name_maintenance = 'Pruebas de resistencias';
             }
-            if ($t->maintenance_type ===7) {
+            if ($t->maintenance_type == 7) {
                 $state_maintenance2 = 'X';
                 $name_maintenance = 'Ensayos y pruebas';
             }
