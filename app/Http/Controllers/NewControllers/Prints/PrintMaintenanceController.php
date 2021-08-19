@@ -10,7 +10,7 @@ class PrintMaintenanceController extends Fpdf
 {
     protected $pdf;
 
-    public function __construct( \App\oympdf $pdf ) {
+    public function __construct( \App\espacios $pdf ) {
         $this->pdf = $pdf;
 
     }
