@@ -282,7 +282,7 @@ class PrintMaintenanceController extends Fpdf
         $this->Cell(5, 6, '', 0, 0);
         $this->Cell(15, 3.2, $search->serie, 0, 0);
 
-        $line  = '3.2';
+        $line  = '3';
         $line2 = '8.4';
         $this->Ln($line2);
         foreach ($search_maintenance as $t) {
@@ -291,10 +291,34 @@ class PrintMaintenanceController extends Fpdf
             $state_maintenance1 = '';
             $state_maintenance2 = '';
 
+            $name_maintenance = '';
+
             if ($t->state_maintenance == 1) {
                 $state_maintenance1 = 'X';
+                $name_maintenance = 'Correctivo';
             }if ($t->state_maintenance == 2) {
                 $state_maintenance2 = 'X';
+                $name_maintenance = 'Preventivo';
+            }
+            if ($t->state_maintenance == 3) {
+                $state_maintenance2 = 'X';
+                $name_maintenance = 'Certificación equipos';
+            }
+            if ($t->state_maintenance == 4) {
+                $state_maintenance2 = 'X';
+                $name_maintenance = 'Calibración y puesta a punto';
+            }
+            if ($t->state_maintenance == 5) {
+                $state_maintenance2 = 'X';
+                $name_maintenance = 'Ensayo dielectrico';
+            }
+            if ($t->state_maintenance == 6) {
+                $state_maintenance2 = 'X';
+                $name_maintenance = 'Pruebas de resistencias';
+            }
+            if ($t->state_maintenance == 7) {
+                $state_maintenance2 = 'X';
+                $name_maintenance = 'Ensayos y pruebas';
             }
 
             $this->Ln();
