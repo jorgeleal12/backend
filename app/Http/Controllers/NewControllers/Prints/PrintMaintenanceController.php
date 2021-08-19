@@ -153,7 +153,7 @@ class PrintMaintenanceController extends Fpdf
 
             $this->Ln($line);
             $this->SetFont('Arial', '', 8);
-            $this->Cell(62, 6, '', 0, 0);
+            $this->Cell(40, 6, '', 0, 0);
             $this->Cell(17, 3.2, $name_maintenance, 0, 0);
             $this->Cell(40, 3.2, $t->who, 0, 0);
             $this->Cell(45, 6, '', 0, 0);
