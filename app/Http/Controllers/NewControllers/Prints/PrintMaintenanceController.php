@@ -74,7 +74,7 @@ class PrintMaintenanceController extends Fpdf
         $this->Cell(23, 3.2,  utf8_decode($search->name_provider), 0, 0);
 
         $this->Ln(8.7);
-        $this->SetFont('Arial', '', 8);
+        $this->SetFont('Arial', '', 7);
         $this->Cell(20, 6, '', 0, 0);
         $this->Cell(23, 3.2,  utf8_decode($service_provided), 0, 0);
 
@@ -113,24 +113,48 @@ class PrintMaintenanceController extends Fpdf
             $date_maintenance   = date('Y-m-d', strtotime($t->date_maintenance));
             $state_maintenance1 = '';
             $state_maintenance2 = '';
+            $name_maintenance = '';
 
             if ($t->state_maintenance == 1) {
                 $state_maintenance1 = 'X';
+                $name_maintenance = 'Correctivo';
             }if ($t->state_maintenance == 2) {
                 $state_maintenance2 = 'X';
+                $name_maintenance = 'Preventivo';
             }
+            if ($t->state_maintenance == 3) {
+                $state_maintenance2 = 'X';
+                $name_maintenance = 'Certificación equipos';
+            }
+            if ($t->state_maintenance == 4) {
+                $state_maintenance2 = 'X';
+                $name_maintenance = 'Calibración y puesta a punto';
+            }
+            if ($t->state_maintenance == 5) {
+                $state_maintenance2 = 'X';
+                $name_maintenance = 'Ensayo dielectrico';
+            }
+            if ($t->state_maintenance == 6) {
+                $state_maintenance2 = 'X';
+                $name_maintenance = 'Pruebas de resistencias';
+            }
+            if ($t->state_maintenance == 7) {
+                $state_maintenance2 = 'X';
+                $name_maintenance = 'Ensayos y pruebas';
+            }
+            
 
             $this->Ln();
             $this->Ln(0.4);
             $this->SetFont('Arial', '', 8);
             $this->Cell(2, 6, '', 0, 0);
             $this->Cell(60, 3.2, $date_maintenance, 0, 0);
-            $this->Cell(23, 3.2, $state_maintenance2, 0, 0);
+            $this->Cell(23, 3.2,'', 0, 0);
 
             $this->Ln($line);
             $this->SetFont('Arial', '', 8);
             $this->Cell(62, 6, '', 0, 0);
-            $this->Cell(17, 3.2, $state_maintenance1, 0, 0);
+            $this->Cell(17, 3.2, $name_maintenance, 0, 0);
             $this->Cell(40, 3.2, $t->who, 0, 0);
             $this->Cell(45, 6, '', 0, 0);
             $this->Cell(23, 3.2, $t->support, 0, 0);
