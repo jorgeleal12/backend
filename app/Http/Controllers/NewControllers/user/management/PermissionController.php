@@ -9,9 +9,7 @@ use Illuminate\Support\Facades\DB;
 class PermissionController extends Controller {
     //
 
-    public function __construct() {
-        $this->middleware( 'jwt', ['except' => ['login']] );
-    }
+
 
     public function create( Request $request ) {
         $permission = $request->input( 'permission' );
