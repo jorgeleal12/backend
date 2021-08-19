@@ -145,7 +145,7 @@ class PrintMaintenanceController extends Fpdf
             
 
             $this->Ln();
-            $this->Ln(0.4);
+            $this->Ln(0.3);
             $this->SetFont('Arial', '', 8);
             $this->Cell(2, 6, '', 0, 0);
             $this->Cell(60, 3.2, $date_maintenance, 0, 0);
