@@ -47,7 +47,7 @@ class PrintMaintenanceController extends Fpdf
 
             $document= explode('.',$search_image->name_image);
             if($document[1]!='pdf'){
-                $this->Image('https://ares-path.s3.amazonaws.com/Items/' . $search_image->name_image, $row, 44, 48, 40);
+                $this->Image($search_image->url, $row, 44, 48, 40);
                 $this->Cell(4, 6, '', 0, 0);
                 $row = $row + 48;
                 $row++;
@@ -224,7 +224,7 @@ class PrintMaintenanceController extends Fpdf
 
             $document= explode('.',$search_image->name_image);
             if($document[1]!='pdf'){
-                $this->Image('https://ares-path.s3.amazonaws.com/Items/' . $search_image->name_image, $row, 44, 48, 40);
+                $this->Image($search_image->url, $row, 44, 48, 40);
                 $this->Cell(4, 6, '', 0, 0);
                 $row = $row + 48;
                 $row++;
