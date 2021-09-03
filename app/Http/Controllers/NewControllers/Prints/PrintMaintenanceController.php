@@ -46,7 +46,7 @@ class PrintMaintenanceController extends Fpdf
         foreach ($search_image as $search_image) {
 
             $document= explode('.',$search_image->name_image);
-            if($document[1]!='pdf'){
+            if($search_image->type_document!='pdf'){
                 $this->Image($search_image->url, $row, 44, 48, 40);
                 $this->Cell(4, 6, '', 0, 0);
                 $row = $row + 48;
@@ -223,7 +223,7 @@ class PrintMaintenanceController extends Fpdf
         foreach ($search_image as $search_image) {
 
             $document= explode('.',$search_image->name_image);
-            if($document[1]!='pdf'){
+            if($search_image->type_document!='pdf'){
                 $this->Image($search_image->url, $row, 44, 48, 40);
                 $this->Cell(4, 6, '', 0, 0);
                 $row = $row + 48;
