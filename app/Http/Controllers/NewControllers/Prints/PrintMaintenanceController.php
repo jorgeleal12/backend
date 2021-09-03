@@ -28,6 +28,7 @@ class PrintMaintenanceController extends Fpdf
 
         $search_image = DB::table('image_items')
             ->where('leaves_idleaves', $idleaves)
+             ->where('type_document', '!=' 'pdf')
             ->take(4)
             ->get();
 
@@ -46,13 +47,13 @@ class PrintMaintenanceController extends Fpdf
         foreach ($search_image as $search_image) {
 
             $document= explode('.',$search_image->name_image);
-            if($search_image->type_document!='pdf'){
+          //  if($search_image->type_document!='pdf'){
          
                 $this->Image($search_image->url, $row, 44, 48, 40);
                 $this->Cell(4, 6, '', 0, 0);
                 $row = $row + 48;
                 $row++;
-            }
+           // }
         }
 
         $name_materials = str_replace('”','"',$search->name_materials);
