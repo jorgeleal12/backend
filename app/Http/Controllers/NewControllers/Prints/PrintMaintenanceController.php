@@ -47,6 +47,7 @@ class PrintMaintenanceController extends Fpdf
 
             $document= explode('.',$search_image->name_image);
             if($search_image->type_document!='pdf'){
+                echo 1;
                 $this->Image($search_image->url, $row, 44, 48, 40);
                 $this->Cell(4, 6, '', 0, 0);
                 $row = $row + 48;
