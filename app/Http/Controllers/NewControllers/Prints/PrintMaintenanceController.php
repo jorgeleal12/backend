@@ -43,7 +43,7 @@ class PrintMaintenanceController extends Fpdf
         $this->SetAutoPageBreak(true, 10);
         $this->Image('../public/images/formato1.jpg', '2', '2', '205', '280', 'JPG');
 
-        $row = 20;
+        $row = 7;
         foreach ($search_image as $search_image) {
 
             $document= explode('.',$search_image->name_image);
